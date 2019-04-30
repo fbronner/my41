@@ -10,14 +10,14 @@ import Foundation
 
 extension String {
 	subscript(integerIndex: Int) -> Character {
-		let index = self.index(self.startIndex, offsetBy: integerIndex)
+		let index = self.index(startIndex, offsetBy: integerIndex)
 //		let index = advance(startIndex, integerIndex)
 			return self[index]
 	}
 	
 	subscript(integerRange: Range<Int>) -> String {
-		let start = self.index(self.startIndex, offsetBy: integerRange.lowerBound)
-		let end = self.index(self.startIndex, offsetBy: integerRange.upperBound)
+		let start = index(startIndex, offsetBy: integerRange.lowerBound)
+		let end = index(startIndex, offsetBy: integerRange.upperBound)
 //		let start = advance(startIndex, integerRange.startIndex)
 //		let end = advance(startIndex, integerRange.endIndex)
 		let range = start..<end

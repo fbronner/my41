@@ -213,13 +213,13 @@ final class Bus {
 	var XMemModules: byte = 0
 	
 	// ROM variables
-	var romChips = Array<Array<RomChip?>>()
+    var romChips: [[RomChip?]] = []
 	var nextActualBankGroup: byte = 1										// counter for loading actual bank groups
-	var activeBank: [Int] = [Int](repeating: 1, count: 0x10)
+	var activeBank = [Int](repeating: 1, count: 0x10)
 	
 	static let sharedInstance = Bus()
 
-	init () {
+	private init () {
 		// 16 pages of 4 banks
 		for page in 0...0xf {
 			romChips.append(Array(repeating: RomChip(), count: 4))
@@ -508,10 +508,9 @@ final class Bus {
 	
 	func removeAllRomChips() {
 		for page in 0...0xf {
-			for bank in 1...4 {
-				self.romChips[page][bank - 1] = nil
+			for bank in 0...3 {
+				romChips[page][bank] = nil
 			}
-			
 		}
 	}
 	
@@ -628,30 +627,30 @@ final class Bus {
 			return false
 		}
 		if address >= 0x040 && address <= 0x0bf {			// extended functions - 128 regs
-			return self.XMemModules >= 1
+			return XMemModules >= 1
 		}
 		if address >= 0x0c0 && address <= 0x0ff {			// main memory for C
 			return true
 		}
 		if address >= 0x100 && address <= 0x13f {			// memory module 1
-			return self.memModules >= 1
+			return memModules >= 1
 		}
 		if address >= 0x140 && address <= 0x17f {			// memory module 2
-			return self.memModules >= 2
+			return memModules >= 2
 		}
 		if address >= 0x180 && address <= 0x1bf {			// memory module 3
-			return self.memModules >= 3
+			return memModules >= 3
 		}
 		if address >= 0x1c0 && address <= 0x1ff {			// memory module 4
-			return self.memModules >= 4
+			return memModules >= 4
 		}
 		// void: 200
 		if address >= 0x201 && address <= 0x2ef {			// extended memory 1 - 239 regs
-			return self.XMemModules >= 2
+			return XMemModules >= 2
 		}
 		// void: 2f0-300
 		if address >= 0x301 && address <= 0x3ef {			// extended memory 2 - 239 regs
-			return self.XMemModules >= 3
+			return XMemModules >= 3
 		}
 		// void: 3f0-3ff
 		// end of memory: 3ff

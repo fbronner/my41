@@ -209,7 +209,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		var cellView: NSTableCellView?
 		if let tColumn = tableColumn {
-			let cView = tableView.make(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
+            let cView = tableView.makeView(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
 			cView.textField?.stringValue = (filePath as NSString).lastPathComponent
 			cellView = cView
 		}
@@ -230,7 +230,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 //			let title = modDetailsView.modDetails?.title
 			let row = rowIndexes.first
 			let filePath = modFiles[row!]
-			pboard.setString(filePath, forType: NSPasteboardTypeString)
+            pboard.setString(filePath, forType: NSPasteboard.PasteboardType.string)
 			
 			return true
 		}
@@ -245,7 +245,7 @@ class ModDetailsView: NSView {
 	
 	override func draw(_ dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
-		let rect = NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6)
+		let rect = NSMakeRect(bounds.origin.x + 3, bounds.origin.y + 3, bounds.size.width - 6, bounds.size.height - 6)
 		
 		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
@@ -298,19 +298,19 @@ class ExpansionView: NSView {
 	
 	override func awakeFromNib() {
 		let theArray = [
-			"NSStringPboardType"
+            NSPasteboard.PasteboardType.string
 		]
 		
-		register(forDraggedTypes: theArray)
+        registerForDraggedTypes(theArray)
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.1569, green: 0.6157, blue: 0.8902, alpha: 0.95)
 		let rect = NSMakeRect(
-			self.bounds.origin.x + 3,
-			self.bounds.origin.y + 3,
-			self.bounds.size.width - 6,
-			self.bounds.size.height - 6
+			bounds.origin.x + 3,
+			bounds.origin.y + 3,
+			bounds.size.width - 6,
+			bounds.size.height - 6
 		)
 		
 		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
@@ -321,11 +321,11 @@ class ExpansionView: NSView {
 		
 		if let fPath = filePath {
 			let font = NSFont.systemFont(ofSize: 11.0)
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+            let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .center
-			let attributes = [
-				NSFontAttributeName : font,
-				NSParagraphStyleAttributeName: textStyle
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font : font,
+                .paragraphStyle: textStyle
 			]
 			
 			let mod = MOD()
@@ -341,7 +341,7 @@ class ExpansionView: NSView {
 	
 	//MARK: - Drag & Drop
 	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+        if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask) == NSDragOperation.generic {
 			return NSDragOperation.generic
 		} else {
 			return NSDragOperation()
@@ -349,7 +349,7 @@ class ExpansionView: NSView {
 	}
 	
 	override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+        if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask) == NSDragOperation.generic {
 			return NSDragOperation.generic
 		} else {
 			return NSDragOperation()
@@ -365,9 +365,9 @@ class ExpansionView: NSView {
 			return false
 		}
 
-		let paste = sender.draggingPasteboard()
+        let paste = sender.draggingPasteboard
 		let theArray = [
-			"NSStringPboardType"
+            NSPasteboard.PasteboardType.string
 		]
 		let desiredType = paste.availableType(from: theArray)
 		if let data = paste.data(forType: desiredType!) {
@@ -404,6 +404,6 @@ class ExpansionView: NSView {
 	}
 	
 	override func concludeDragOperation(_ sender: NSDraggingInfo?) {
-		self.setNeedsDisplay(self.bounds)
+		setNeedsDisplay(bounds)
 	}
 }

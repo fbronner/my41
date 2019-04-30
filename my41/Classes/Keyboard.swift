@@ -36,15 +36,14 @@ class KeyGroup : NSView {
 	
 	override func draw(_ dirtyRect: NSRect) {
 		NSColor.clear.setFill()
-		NSRectFill(dirtyRect)
+        dirtyRect.fill()
+
 		
 		super.draw(dirtyRect)
 	}
 	
 	func key(key: Key, pressed: Bool) {
-		if let code = key.keyCode as? Bits8 {
-			keyboard.keyWithCode(code: code, pressed: pressed)
-		}
+        keyboard.keyWithCode(code: key.keyCode, pressed: pressed)
 
 //		if pressed {
 //			playSound()
@@ -63,11 +62,11 @@ class KeyGroup : NSView {
 		let url = NSURL.fileURL(withPath: Bundle.main.path(forResource: "keyPressSound", ofType: "wav")!)
 		
 		do {
-			self.audioPlayer = try AVAudioPlayer(contentsOf: url)
+			audioPlayer = try AVAudioPlayer(contentsOf: url)
 		} catch _ as NSError {
-			self.audioPlayer = nil
+			audioPlayer = nil
 		}
-		self.audioPlayer?.prepareToPlay()
-		self.audioPlayer?.play()
+		audioPlayer?.prepareToPlay()
+		audioPlayer?.play()
 	}
 }

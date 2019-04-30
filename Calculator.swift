@@ -56,9 +56,9 @@ class Calculator {
 
 		bus.removeAllRomChips()
 		
-		self.installBuiltinRoms()
+		installBuiltinRoms()
 		
-		self.installExternalModules()
+		installExternalModules()
 		emptyRAM()
 
 		if restoringMemory {
@@ -73,11 +73,11 @@ class Calculator {
 		}
 
 		cpu.setRunning(true)
-		self.startExecutionTimer()
+		startExecutionTimer()
 	}
 	
 	func installBuiltinRoms() {
-		self.readCalculatorDescriptionFromDefaults()
+		readCalculatorDescriptionFromDefaults()
 		
 		let debugSupportRom = RomChip()
 		debugSupportRom.writable = true
@@ -89,10 +89,10 @@ class Calculator {
 			andBank: byte(0)
 		)
 		
-		if self.calculatorMod.data != nil {
+		if calculatorMod.data != nil {
 			// Install ROMs which came with the calculator module
 			do {
-				try bus.installMod(self.calculatorMod)
+				try bus.installMod(calculatorMod)
 			} catch MODError.freeSpace {
 				displayAlert("No free space")
 			} catch {
@@ -103,9 +103,9 @@ class Calculator {
 	
 	func installExternalModules() {
 		for idx in 0...3 {
-			if self.portMod[idx]?.data != nil {
+			if portMod[idx]?.data != nil {
 				do {
-					try bus.installMod(self.portMod[idx]!)
+					try bus.installMod(portMod[idx]!)
 				} catch MODError.freeSpace {
 					displayAlert("No free space")
 				} catch {

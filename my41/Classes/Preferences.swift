@@ -55,11 +55,11 @@ class PreferencesContainerViewController: NSViewController {
 	}
 	
 	func loadPreferencesCalculatorViewController() {
-		self.performSegue(withIdentifier: "showSelectCalculatorView", sender: self)
+		performSegue(withIdentifier: "showSelectCalculatorView", sender: self)
 	}
 	
 	func loadPreferencesModsViewController() {
-		self.performSegue(withIdentifier: "showModsView", sender: self)
+		performSegue(withIdentifier: "showModsView", sender: self)
 	}
 	
 	func applyChanges() {
@@ -200,7 +200,7 @@ class PreferencesViewController: NSViewController {
 	@IBOutlet weak var modDetailsView: ModDetailsView!
 	
 	override func viewDidLoad() {
-		self.title = ""
+		title = ""
 		comments.stringValue = ""
 		
 		// Draw border on splitView
@@ -216,50 +216,50 @@ class PreferencesViewController: NSViewController {
 class PreferencesSplitViewController: NSSplitViewController {
 	
 	override func viewWillAppear() {
-		let menuVC = self.splitViewItems[0].viewController as! PreferencesMenuViewController
-		let containerVC = self.splitViewItems[1].viewController as! PreferencesContainerViewController
+		let menuVC = splitViewItems[0].viewController as! PreferencesMenuViewController
+		let containerVC = splitViewItems[1].viewController as! PreferencesContainerViewController
 		menuVC.preferencesContainerViewController = containerVC
 		
-		self.view.addConstraint(
+		view.addConstraint(
 			NSLayoutConstraint(
-				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				item: splitViewItems[0].viewController.view,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 194
 			)
 		)
-		self.view.addConstraint(
+		view.addConstraint(
 			NSLayoutConstraint(
-				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				item: splitViewItems[0].viewController.view,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 587
 			)
 		)
-		self.view.addConstraint(
+		view.addConstraint(
 			NSLayoutConstraint(
-				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				item: splitViewItems[1].viewController.view,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 528
 			)
 		)
-		self.view.addConstraint(
+		view.addConstraint(
 			NSLayoutConstraint(
-				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				item: splitViewItems[1].viewController.view,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 587
 			)
@@ -272,8 +272,8 @@ class PreferencesSplitViewController: NSSplitViewController {
 
 class PreferencesSegue: NSStoryboardSegue {
 	override func perform() {
-		let source = self.sourceController as! NSViewController
-		let destination = self.destinationController as! NSViewController
+		let source = sourceController as! NSViewController
+		let destination = destinationController as! NSViewController
 		
 		if source.view.subviews.count > 0 {
 			let aView: AnyObject = source.view.subviews[0]

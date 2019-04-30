@@ -9,9 +9,9 @@
 import Foundation
 import Cocoa
 
-class Key: NSButton {
+@IBDesignable class Key: NSButton {
 	@IBOutlet weak var keygroup: KeyGroup!
-	var keyCode: NSNumber?
+    @IBInspectable var keyCode: Bits8 = 0
 	var pressed: Bool = false
 	
 	override func acceptsFirstMouse(for theEvent: NSEvent?) -> Bool {
@@ -24,7 +24,7 @@ class Key: NSButton {
 		}
 		highlight(true)
 		
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		appDelegate.buttonPressed = true
 	}
 	
@@ -34,7 +34,7 @@ class Key: NSButton {
 		}
 		highlight(false)
 		
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		appDelegate.buttonPressed = false
 	}
 	
@@ -66,7 +66,7 @@ class ButtonCell: NSButtonCell {
 	}
 	
 	override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
-		let ctx = NSGraphicsContext.current()!
+        let ctx = NSGraphicsContext.current!
 		ctx.saveGraphicsState()
 		
 		let roundedRadius: CGFloat = 3.0
@@ -145,12 +145,12 @@ class ButtonCell: NSButtonCell {
 				xRadius: roundedRadius,
 				yRadius: roundedRadius).setClip()
 			NSColor(calibratedWhite: 0.0, alpha: 0.35).setFill()
-			NSRectFillUsingOperation(frame, .sourceOver)
+            frame.fill(using: .sourceOver)
 			ctx.restoreGraphicsState()
 		}
 		
 		// Text Drawing
-		if lowerText != nil {
+		if let lowerText = lowerText {
 			var lowerTextRect: NSRect
 			if lowerText == "N" {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 86.0, 12.0)
@@ -167,52 +167,52 @@ class ButtonCell: NSButtonCell {
 			} else {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+            let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .center
 			
 			var font: NSFont
-			if (lowerText!).characters.count > 1 {
+			if lowerText.count > 1 {
 				font = NSFont(name: "Helvetica", size: 9.0)!
 			} else {
 				font = NSFont(name: "Helvetica", size: 11.0)!
 			}
-			let lowerTextFontAttributes: Dictionary = [
-				NSFontAttributeName: font,
-				NSForegroundColorAttributeName: NSColor(calibratedRed: 0.341, green: 0.643, blue: 0.78, alpha: 1.0),
-				NSParagraphStyleAttributeName: textStyle
+            let lowerTextFontAttributes: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .foregroundColor: NSColor(calibratedRed: 0.341, green: 0.643, blue: 0.78, alpha: 1.0),
+                .paragraphStyle: textStyle
 			]
-			lowerText?.draw(in: NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
+			lowerText.draw(in: NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
 		}
 		
-		if upperText != nil {
+		if let upperText = upperText {
 			let paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
 			paragrapStyle.alignment = .center
-			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
+            upperText.addAttribute(.paragraphStyle, value: paragrapStyle, range: NSMakeRange(0, upperText.length))
 			
 			
 			var upperTextRect: NSRect
-			if upperText?.string == "ENTER ↑" || upperText?.string == "N" {
+			if upperText.string == "ENTER ↑" || upperText.string == "N" {
 				upperTextRect = NSMakeRect(1.0, 3.0, 86.0, 15.0)
-			} else if upperText?.string == "÷" || upperText?.string == "×" {
+			} else if upperText.string == "÷" || upperText.string == "×" {
 				upperTextRect = NSMakeRect(1.0, 0.0, 36.0, 15.0)
-			} else if upperText?.string == "╋" || upperText?.string == "━" {
+			} else if upperText.string == "╋" || upperText.string == "━" {
 				upperTextRect = NSMakeRect(1.0, 5.0, 36.0, 15.0)
-			} else if upperText?.string == "7" || upperText?.string == "8" || upperText?.string == "9" {
+			} else if upperText.string == "7" || upperText.string == "8" || upperText.string == "9" {
 				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
-			} else if upperText?.string == "4" || upperText?.string == "5" || upperText?.string == "6" {
+			} else if upperText.string == "4" || upperText.string == "5" || upperText.string == "6" {
 				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
-			} else if upperText?.string == "1" || upperText?.string == "2" || upperText?.string == "3" {
+			} else if upperText.string == "1" || upperText.string == "2" || upperText.string == "3" {
 				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
-			} else if upperText?.string == "0" || upperText?.string == "•" || upperText?.string == "," {
+			} else if upperText.string == "0" || upperText.string == "•" || upperText.string == "," {
 				upperTextRect = NSMakeRect(1.0, 2.0, 40.0, 14.0)
-			} else if upperText?.string == "SPACE" || upperText?.string == "R/S" {
+			} else if upperText.string == "SPACE" || upperText.string == "R/S" {
 				upperTextRect = NSMakeRect(1.0, 3.0, 40.0, 14.0)
-			} else if upperText?.string == "ON" || upperText?.string == "USER" || upperText?.string == "PRGM" || upperText?.string == "ALPHA" {
+			} else if upperText.string == "ON" || upperText.string == "USER" || upperText.string == "PRGM" || upperText.string == "ALPHA" {
 				upperTextRect = NSMakeRect(3.0, 4.0, 48.0, 14.0)
 			} else {
 				upperTextRect = NSMakeRect(1.0, 3.0, 40.0, 15.0)
 			}
-			upperText!.draw(in: NSOffsetRect(upperTextRect, 0, -1))
+			upperText.draw(in: NSOffsetRect(upperTextRect, 0, -1))
 		}
 	}
 }

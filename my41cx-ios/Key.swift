@@ -16,7 +16,7 @@ class Key: UIButton {
 	@objc var shiftButton: String?
 	var switchButton: String?
 
-	@objc var keyCode: NSNumber?
+	@objc var keyCode: Bits8?
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
@@ -25,23 +25,23 @@ class Key: UIButton {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 
-		self.layer.cornerRadius = roundedRadius
-		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIColor.black.cgColor
-		self.layer.masksToBounds = true
+		layer.cornerRadius = roundedRadius
+		layer.borderWidth = 1.0
+		layer.borderColor = UIColor.black.cgColor
+		layer.masksToBounds = true
 		
-		self.setNeedsDisplay()
+		setNeedsDisplay()
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		self.layer.cornerRadius = roundedRadius
-		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIColor.black.cgColor
-		self.layer.masksToBounds = true
+		layer.cornerRadius = roundedRadius
+		layer.borderWidth = 1.0
+		layer.borderColor = UIColor.black.cgColor
+		layer.masksToBounds = true
 		
-		self.setNeedsDisplay()
+		setNeedsDisplay()
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -60,14 +60,14 @@ class Key: UIButton {
 	
 	override func draw(_ rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
-//		let xRatio = self.bounds.size.height / 51.0
-		let yRatio = self.bounds.size.height / 42.0
+//		let xRatio = bounds.size.height / 51.0
+		let yRatio = bounds.size.height / 42.0
 
 		context?.saveGState()
 		let backgroundGradient = CAGradientLayer()
 		backgroundGradient.masksToBounds = true
-		backgroundGradient.cornerRadius = self.layer.cornerRadius
-		backgroundGradient.frame = self.bounds
+		backgroundGradient.cornerRadius = layer.cornerRadius
+		backgroundGradient.frame = bounds
 		if switchButton == "Y" {
 			backgroundGradient.colors = [
 				UIColor(white: 0.30, alpha: 1.0).cgColor,
@@ -114,12 +114,12 @@ class Key: UIButton {
 				1.0
 			]
 		}
-		if self.layer.sublayers != nil {
-			if let sublayers = self.layer.sublayers?.count, sublayers > 0 {
-				self.layer.sublayers?.remove(at: 0)
+		if layer.sublayers != nil {
+			if let sublayers = layer.sublayers?.count, sublayers > 0 {
+				layer.sublayers?.remove(at: 0)
 			}
 		}
-		self.layer.insertSublayer(backgroundGradient, at: 0)
+		layer.insertSublayer(backgroundGradient, at: 0)
 		
 		// Draw darker overlay if button is pressed
 		if isHighlighted {
@@ -143,7 +143,7 @@ class Key: UIButton {
 			}
 			lowerTextLayer.foregroundColor = UIColor(red: 0.341, green: 0.643, blue: 0.78, alpha: 1.0).cgColor
 			lowerTextLayer.string = lower
-			self.layer.addSublayer(lowerTextLayer)
+			layer.addSublayer(lowerTextLayer)
 		}
 		
 		if let upper = upperText {
@@ -159,7 +159,7 @@ class Key: UIButton {
 				upperTextLayer.frame = CGRect(x: 1.0, y: 1.0, width: rect.width - 2.0, height: (rect.height / 2.0))
 			}
 			upperTextLayer.string = upper
-			self.layer.addSublayer(upperTextLayer)
+			layer.addSublayer(upperTextLayer)
 		}
 		context?.restoreGState()
 	}

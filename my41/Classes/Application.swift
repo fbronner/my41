@@ -11,8 +11,8 @@ import Cocoa
 
 final class CalculatorApplication: NSApplication {
 	override func sendEvent(_ theEvent: NSEvent) {
-		if theEvent.type == NSEventType.keyUp && (theEvent.modifierFlags.intersection(.command)).rawValue != 0 {
-			self.keyWindow?.sendEvent(theEvent)
+        if theEvent.type == .keyUp && (theEvent.modifierFlags.intersection(.command)).rawValue != 0 {
+			keyWindow?.sendEvent(theEvent)
 		} else {
 			super.sendEvent(theEvent)
 		}

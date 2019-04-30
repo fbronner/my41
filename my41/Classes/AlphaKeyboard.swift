@@ -119,9 +119,9 @@ final class AlphaKeyboardViewController: NSViewController {
 	@IBOutlet weak var buttonRS: Key!
 
 	override func viewWillAppear() {
-		self.view.layer = CALayer()
-		self.view.layer?.backgroundColor = NSColor(calibratedRed: 0.221, green: 0.221, blue: 0.221, alpha: 1.0).cgColor
-		self.view.wantsLayer = true
+		view.layer = CALayer()
+		view.layer?.backgroundColor = NSColor(calibratedRed: 0.221, green: 0.221, blue: 0.221, alpha: 1.0).cgColor
+		view.wantsLayer = true
 		
 		// Label Σ-
 		labelSigmaMinus.attributedStringValue = mutableAttributedStringFromString("a", color: nil, fontName: "Helvetica", fontSize: 12.0)
@@ -334,13 +334,13 @@ final class AlphaKeyboardViewController: NSViewController {
 				if let aColor = color {
 					return NSMutableAttributedString(
 						string: aString,
-						attributes: [NSFontAttributeName : actualFont,
-							NSForegroundColorAttributeName: aColor
+                        attributes: [NSAttributedString.Key.font : actualFont,
+                                     NSAttributedString.Key.foregroundColor: aColor
 						]
 					)
 				} else {
 					return NSMutableAttributedString(string: aString,
-						attributes: [NSFontAttributeName : actualFont
+                                                     attributes: [NSAttributedString.Key.font : actualFont
 						]
 					)
 				}

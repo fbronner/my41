@@ -17,19 +17,19 @@ class DebugMenuViewController: NSViewController {
 	@IBOutlet weak var menuView: NSView!
 	
 	override func viewWillAppear() {
-		self.view.layer = CALayer()
-		self.view.layer?.backgroundColor = NSColor(calibratedRed: 0.4824, green: 0.6667, blue: 0.2941, alpha: 1.0).cgColor
-		self.view.wantsLayer = true
+		view.layer = CALayer()
+		view.layer?.backgroundColor = NSColor(calibratedRed: 0.4824, green: 0.6667, blue: 0.2941, alpha: 1.0).cgColor
+		view.wantsLayer = true
 
-		registersView = SelectedDebugView(frame: CGRect(x: 0, y: self.menuView.frame.size.height - 35, width: 184, height: 24))
+		registersView = SelectedDebugView(frame: CGRect(x: 0, y: menuView.frame.size.height - 35, width: 184, height: 24))
 		registersView?.text = "Registers"
 		registersView?.selected = true
-		self.menuView.addSubview(registersView!)
+		menuView.addSubview(registersView!)
 		
-		memoryView = SelectedDebugView(frame: CGRect(x: 0, y: self.menuView.frame.size.height - 59, width: 184, height: 24))
+		memoryView = SelectedDebugView(frame: CGRect(x: 0, y: menuView.frame.size.height - 59, width: 184, height: 24))
 		memoryView?.text = "Memory"
 		memoryView?.selected = false
-		self.menuView.addSubview(memoryView!)
+		menuView.addSubview(memoryView!)
 	}
 	
 	@IBAction func registersAction(sender: AnyObject) {
@@ -67,7 +67,7 @@ class SelectedDebugView: NSView {
 		let font = NSFont(name: "Helvetica Bold", size: 14.0)
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-		let textStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+        let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = .left
 		
 		if selected! {
@@ -95,23 +95,23 @@ class SelectedDebugView: NSView {
 			rectanglePath.fill()
 			
 			if let actualFont = font {
-				let textFontAttributes: NSDictionary = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: textColor,
-					NSParagraphStyleAttributeName: textStyle
+				let textFontAttributes: [NSAttributedString.Key: Any] = [
+                    NSAttributedString.Key.font: actualFont,
+                    NSAttributedString.Key.foregroundColor: textColor,
+                    NSAttributedString.Key.paragraphStyle: textStyle
 				]
 
-				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
+				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		} else {
 			if let actualFont = font {
-				let textFontAttributes: NSDictionary = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: backColor,
-					NSParagraphStyleAttributeName: textStyle
+				let textFontAttributes: [NSAttributedString.Key: Any] = [
+                    NSAttributedString.Key.font: actualFont,
+                    NSAttributedString.Key.foregroundColor: backColor,
+                    NSAttributedString.Key.paragraphStyle: textStyle
 				]
 				
-				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
+				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		}
 	}
@@ -124,7 +124,7 @@ class DebugMenuLabelView: NSView {
 	override func awakeFromNib() {
 		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColor(red: 0.5412, green: 0.7098, blue: 0.3804, alpha: 1.0)
-		self.wantsLayer = true
-		self.layer = viewLayer
+		wantsLayer = true
+		layer = viewLayer
 	}
 }

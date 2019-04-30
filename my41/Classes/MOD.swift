@@ -229,7 +229,7 @@ final class MOD {
 	}
 	
 	func is41C() -> Bool {
-		if let sName = self.shortName {
+		if let sName = shortName {
 			if moduleHeader.category == .os && sName.range(of: "nut-c.mod") != nil {
 				return true
 			}
@@ -239,7 +239,7 @@ final class MOD {
 	}
 	
 	func is41CV() -> Bool {
-		if let sName = self.shortName {
+		if let sName = shortName {
 			if moduleHeader.category == .os && sName.range(of: "nut-cv.mod") != nil {
 				return true
 			}
@@ -249,7 +249,7 @@ final class MOD {
 	}
 	
 	func is41CX() -> Bool {
-		if let sName = self.shortName {
+		if let sName = shortName {
 			if moduleHeader.category == .os && sName.range(of: "nut-cx.mod") != nil {
 				return true
 			}
@@ -512,7 +512,7 @@ final class MOD {
 //		data!.getBytes(&page.pageCustom, range: NSMakeRange(startPosition+5156, 32))
 
 		let modulePage = ModulePage()
-		modulePage.moduleHeader = self.moduleHeader
+		modulePage.moduleHeader = moduleHeader
 		modulePage.name = convertCCharToString(page.name)
 		modulePage.ID = convertCCharToString(page.ID)
 		modulePage.page = page.page
@@ -537,9 +537,9 @@ final class MOD {
 		if fileManager.fileExists(atPath: filename) {
 			do {
 				let fileAttributes: NSDictionary = try fileManager.attributesOfItem(atPath: filename) as NSDictionary
-				self.fileSize = fileAttributes[FileAttributeKey.size]! as! Int
-				self.data = try Data(contentsOf: URL(fileURLWithPath: filename), options: [.mappedIfSafe])
-				self.shortName = (filename as NSString).lastPathComponent.lowercased()
+				fileSize = fileAttributes[FileAttributeKey.size]! as! Int
+				data = try Data(contentsOf: URL(fileURLWithPath: filename), options: [.mappedIfSafe])
+				shortName = (filename as NSString).lastPathComponent.lowercased()
 				moduleHeader.fullFileName = filename
 				
 				populateModuleHeader()
@@ -564,7 +564,7 @@ final class MOD {
 	}
 	
 	func categoryDescription() -> String? {
-		if self.data == nil {
+		if data == nil {
 			return nil
 		}
 		
@@ -589,7 +589,7 @@ final class MOD {
 	}
 	
 	func hardwareDescription() -> String? {
-		if self.data == nil {
+		if data == nil {
 			return nil
 		}
 		

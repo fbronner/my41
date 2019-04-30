@@ -24,18 +24,18 @@ final class RomChip {
 	}
 
 	convenience init(fromBIN bin: [byte], actualBankGroup bankGroup: byte) {
-		self.init(isWritable: false)
+        self.init(isWritable: false)
 		binToWords(bin)
-		self.actualBankGroup = bankGroup
+		actualBankGroup = bankGroup
 	}
 
 	convenience init(fromFile path: String) {
-		self.init(isWritable: false)
+        self.init(isWritable: false)
 		loadFromFile(path)
 	}
 	
 	convenience init() {
-		self.init(isWritable: false)
+        self.init(isWritable: false)
 	}
 	
 	func binToWords(_ bin: [byte]) {
@@ -46,13 +46,13 @@ final class RomChip {
 		var ptr: Int = 0
 //		for var idx = 0; idx < 5120; idx += 5 {
 		for idx in stride(from: 0, to: 5120, by: 5) {
-			self.words[ptr] = word(((word(bin[idx+1]) & 0x03) << 8) | word(bin[idx]))
+			words[ptr] = word(((word(bin[idx+1]) & 0x03) << 8) | word(bin[idx]))
 			ptr += 1
-			self.words[ptr] = word(((word(bin[idx+2]) & 0x0f) << 6) | ((word(bin[idx+1]) & 0xfc) >> 2))
+			words[ptr] = word(((word(bin[idx+2]) & 0x0f) << 6) | ((word(bin[idx+1]) & 0xfc) >> 2))
 			ptr += 1
-			self.words[ptr] = word(((word(bin[idx+3]) & 0x3f) << 4) | ((word(bin[idx+2]) & 0xf0) >> 4))
+			words[ptr] = word(((word(bin[idx+3]) & 0x3f) << 4) | ((word(bin[idx+2]) & 0xf0) >> 4))
 			ptr += 1
-			self.words[ptr] = word((word(bin[idx+4]) << 2) | ((word(bin[idx+3]) & 0xc0) >> 6))
+			words[ptr] = word((word(bin[idx+4]) << 2) | ((word(bin[idx+3]) & 0xc0) >> 6))
 			ptr += 1
 		}
 	}

@@ -21,10 +21,6 @@ class iOSKeyboard : NSObject {
 	@IBOutlet weak var keyPrgm: Key!
 	@IBOutlet weak var keyAlpha: Key!
 
-	override init() {
-		super.init()
-	}
-	
 	func keyWithCode(_ code: Bits8, pressed: Bool) {
 		cpu.keyWithCode(code, pressed: pressed)
 	}
@@ -39,7 +35,7 @@ class KeyGroup: UIView {
 		super.init(coder: aDecoder)
 		
 		let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: "keyPressSound", ofType: "wav")!)
-		AudioServicesCreateSystemSoundID(url as CFURL, &self.mySound)
+		AudioServicesCreateSystemSoundID(url as CFURL, &mySound)
 	}
 
 	override func draw(_ rect: CGRect) {
@@ -59,7 +55,7 @@ class KeyGroup: UIView {
 		
 		if pressed && SOUND {
 			DispatchQueue.global(qos: .utility).async {
-				AudioServicesPlaySystemSound(self.mySound)
+				AudioServicesPlaySystemSound(mySound)
 			}
 		}
 	}

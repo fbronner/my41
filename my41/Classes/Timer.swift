@@ -81,8 +81,8 @@ class Timer : Peripheral {
 	func synchronyzeWithComputer()
 	{
 		// This should help me detect when I'm being activated. I want to reset the clock
-		if (Int(self.registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
-			self.setToCurrentTime()
+		if (Int(registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
+			setToCurrentTime()
 		}
 	}
 	
@@ -146,7 +146,7 @@ class Timer : Peripheral {
 	
 	// MARK: Peripheral Delegate Methods
 	func pluggedIntoBus(_ theBus: Bus?) {
-		self.aBus = theBus
+		aBus = theBus
 	}
 	
 	func readFromRegister(_ param: Bits4) {

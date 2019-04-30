@@ -146,7 +146,7 @@ func enableBank(_ bankSet: Bits4) {
 	// search for banks that match ActualBankGroup
 	for slot in 0...0xf {
 		for bank in 1...4 {
-			if let rom1 = bus.romChips[slot][bank - 1], let _ = bus.romChips[slot][Int(bankSet) - 1] {
+			if let rom1 = bus.romChips[slot][bank - 1], bus.romChips[slot][Int(bankSet) - 1] != nil {
 				if let currentROM = cpu.currentRomChip {
 					if currentROM.actualBankGroup == rom1.actualBankGroup {
 						bus.activeBank[slot] = Int(bankSet)

@@ -43,20 +43,20 @@ class Display: UIView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		self.backgroundColor = .clear
+		backgroundColor = .clear
 		calculatorController.display = self
-		self.displayFont = self.loadFont("hpfont")
-		self.segmentPaths = DisplaySegmentPaths()
-		self.on = true
-		self.updateCountdown = 2
+		displayFont = loadFont("hpfont")
+		segmentPaths = DisplaySegmentPaths()
+		on = true
+		updateCountdown = 2
 		bus.installPeripheral(self, inSlot: 0xFD)
 		bus.display = self
 		
-		for idx in 0..<self.numDisplayCells {
-			self.registers.A[idx] = 0xA
-			self.registers.B[idx] = 0x3
-			self.registers.C[idx] = 0x2
-			self.registers.E = 0xfff
+		for idx in 0..<numDisplayCells {
+			registers.A[idx] = 0xA
+			registers.B[idx] = 0x3
+			registers.C[idx] = 0x2
+			registers.E = 0xfff
 		}
 		
 		//-- initialize the display character to unicode lookup table:
@@ -78,32 +78,30 @@ class Display: UIView, Peripheral {
 	}
 
 	override func draw(_ rect: CGRect) {
-		if self.segmentPaths.count == 0 {
-			self.annunciatorFont = UIFont(
+		if segmentPaths.count == 0 {
+			annunciatorFont = UIFont(
 				name: "Menlo",
-				size:self.annunciatorFontScale * self.annunciatorFontSize
+				size:annunciatorFontScale * annunciatorFontSize
 			)
 			
-			self.segmentPaths = bezierPaths()
-			self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
+			segmentPaths = bezierPaths()
+			annunciatorPositions = calculateAnnunciatorPositions(annunciatorFont!, inRect: bounds)
 		}
 		if on {
-			if true {
-				let context = UIGraphicsGetCurrentContext()
-				context?.saveGState()
-				for idx in 0..<numDisplayCells {
-					let segmentsOn = segmentsForCell(idx)
-					for seg in 0..<numDisplaySegments {
-						if (segmentsOn & (1 << UInt32(seg))) != 0 {
-							let path: UIBezierPath = segmentPaths[seg]
-							context?.addPath(path.cgPath)
-						}
-					}
-					context?.translateBy(x: cellWidth(), y: 0.0)
-				}
-				context?.drawPath(using: CGPathDrawingMode.fill)
-				context?.restoreGState()
-			}
+            let context = UIGraphicsGetCurrentContext()
+            context?.saveGState()
+            for idx in 0..<numDisplayCells {
+                let segmentsOn = segmentsForCell(idx)
+                for seg in 0..<numDisplaySegments {
+                    if (segmentsOn & (1 << UInt32(seg))) != 0 {
+                        let path: UIBezierPath = segmentPaths[seg]
+                        context?.addPath(path.cgPath)
+                    }
+                }
+                context?.translateBy(x: cellWidth(), y: 0.0)
+            }
+            context?.drawPath(using: CGPathDrawingMode.fill)
+            context?.restoreGState()
 
 			let attrs = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font): annunciatorFont!
@@ -139,8 +137,8 @@ class Display: UIView, Peripheral {
 	
 	func bezierPaths() -> DisplaySegmentPaths
 	{
-//		let xRatio = self.bounds.size.width / 240.0
-//		let yRatio = self.bounds.size.height / 38.0
+//		let xRatio = bounds.size.width / 240.0
+//		let yRatio = bounds.size.height / 38.0
 		let xRatio: CGFloat = 1.0
 		let yRatio: CGFloat = 1.0
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
@@ -373,8 +371,8 @@ class Display: UIView, Peripheral {
 	
 	func calculateAnnunciatorPositions(_ font: UIFont, inRect bounds: CGRect) -> [CGPoint] {
 		// Distribute the annunciators evenly across the width of the display based on the sizes of their strings.
-//		let xRatio = self.bounds.size.width / 240.0
-//		let yRatio = self.bounds.size.height / 38.0
+//		let xRatio = bounds.size.width / 240.0
+//		let yRatio = bounds.size.height / 38.0
 
 		var positions: [CGPoint] = [CGPoint](repeating: CGPoint(x: 0.0, y: 0.0), count: numAnnunciators)
 		var annunciatorWidths: [CGFloat] = [CGFloat](repeating: 0.0, count: numAnnunciators)

@@ -27,14 +27,14 @@ class PreferencesMenuViewController: NSViewController {
 		calculatorView = SelectedPreferencesView(
 			frame: CGRect(
 				x: 0.0,
-				y: self.menuView.frame.height - 38.0,
+				y: menuView.frame.height - 38.0,
 				width: 184.0,
 				height: 24.0
 			)
 		)
 		calculatorView?.text = "Calculator"
 		calculatorView?.selected = true
-		self.menuView.addSubview(calculatorView!)
+		menuView.addSubview(calculatorView!)
 		
 		if modsView != nil {
 			modsView?.removeFromSuperview()
@@ -42,14 +42,14 @@ class PreferencesMenuViewController: NSViewController {
 		modsView = SelectedPreferencesView(
 			frame: CGRect(
 				x: 0.0,
-				y: self.menuView.frame.height - 65.0,
+				y: menuView.frame.height - 65.0,
 				width: 184.0,
 				height: 24.0
 			)
 		)
 		modsView?.text = "MODs"
 		modsView?.selected = false
-		self.menuView.addSubview(modsView!)
+		menuView.addSubview(modsView!)
 	}
 	
 	
@@ -77,8 +77,8 @@ class PreferencesMenuView: NSView {
 	override func awakeFromNib() {
 		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColor(red: 0.9843, green: 0.9804, blue: 0.9725, alpha: 1.0)
-		self.wantsLayer = true
-		self.layer = viewLayer
+		wantsLayer = true
+		layer = viewLayer
 	}
 }
 
@@ -88,8 +88,8 @@ class PreferencesMenuLabelView: NSView {
 	override func awakeFromNib() {
 		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColor(red: 0.8843, green: 0.8804, blue: 0.8725, alpha: 1.0)
-		self.wantsLayer = true
-		self.layer = viewLayer
+		wantsLayer = true
+		layer = viewLayer
 	}
 }
 
@@ -105,7 +105,7 @@ class SelectedPreferencesView: NSView {
 		let font = NSFont(name: "Helvetica Bold", size: 14.0)
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-		let textStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+        let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = .left
 		
 		if selected! {
@@ -133,20 +133,20 @@ class SelectedPreferencesView: NSView {
 			rectanglePath.fill()
 			
 			if let actualFont = font {
-				let textFontAttributes = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: textColor,
-					NSParagraphStyleAttributeName: textStyle
+				let textFontAttributes: [NSAttributedString.Key : Any] = [
+                    .font: actualFont,
+                    .foregroundColor: textColor,
+                    .paragraphStyle: textStyle
 				]
 				
 				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		} else {
 			if let actualFont = font {
-				let textFontAttributes = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: backColor,
-					NSParagraphStyleAttributeName: textStyle
+				let textFontAttributes: [NSAttributedString.Key : Any] = [
+                    .font: actualFont,
+                    .foregroundColor: backColor,
+                    .paragraphStyle: textStyle
 				]
 				
 				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)

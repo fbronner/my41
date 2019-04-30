@@ -16,11 +16,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		let defaults = UserDefaults.standard
 		if let _ = defaults.object(forKey: "memory") as? NSData {
-			CalculatorApplication.shared().activate(ignoringOtherApps: false)
+            CalculatorApplication.shared.activate(ignoringOtherApps: false)
 		} else {
-			CalculatorApplication.shared().activate(ignoringOtherApps: true)
+            CalculatorApplication.shared.activate(ignoringOtherApps: true)
 		}
-		if let aWindow = self.window {
+		if let aWindow = window {
 			aWindow.becomeFirstResponder()
 			aWindow.becomeKey()
 			aWindow.becomeMain()

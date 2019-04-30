@@ -20,20 +20,20 @@ class CalculatorWindow : NSWindow {
 	//This point is used in dragging to mark the initial click location
 	var initialLocation: NSPoint?
 
-	override init(contentRect: NSRect, styleMask style: NSWindowStyleMask, backing backingStoreType: NSBackingStoreType, defer flag: Bool) {
+    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }
 
 	override func awakeFromNib() {
-		let appDelegate =  CalculatorApplication.shared().delegate as! AppDelegate
+        let appDelegate =  CalculatorApplication.shared.delegate as! AppDelegate
 		appDelegate.window = self
 		
-		self.isExcludedFromWindowsMenu = false
-		self.backgroundColor = NSColor.clear
-		self.isOpaque = false
-		self.hasShadow = true
+		isExcludedFromWindowsMenu = false
+		backgroundColor = NSColor.clear
+		isOpaque = false
+		hasShadow = true
 	}
 	
 	override var canBecomeMain: Bool {
@@ -53,14 +53,14 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	override func mouseDragged(with theEvent: NSEvent) {
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		if appDelegate.buttonPressed {
 			return
 		}
 
 		if let iLocation = initialLocation {
-			let screenVisibleFrame = NSScreen.main()?.visibleFrame
-			let windowFrame = self.frame
+            let screenVisibleFrame = NSScreen.main?.visibleFrame
+			let windowFrame = frame
 			var newOrigin = windowFrame.origin
 			
 			// Get the mouse location in window coordinates.
@@ -76,7 +76,7 @@ class CalculatorWindow : NSWindow {
 			}
 			
 			// Move the window to the new location
-			self.setFrameOrigin(newOrigin)
+			setFrameOrigin(newOrigin)
 		}
 	}
 	
@@ -102,50 +102,38 @@ class Display : NSView, Peripheral {
 	var annunciatorBottomMargin: CGFloat = 4.0
 	var annunciatorPositions: [NSPoint] = [NSPoint](repeating: NSMakePoint(0.0, 0.0), count: 12)
 	var foregroundColor: NSColor?
-	
+ 
+    private var _contrast: Digit = 0
 	var contrast: Digit {
 		set {
-			self.contrast = newValue & 0xf
+			_contrast = newValue & 0xf
 			
 			scheduleUpdate()
 		}
 		
 		get {
-			return self.contrast
+			return _contrast
 		}
-	}
-	
-//	override init() {
-//		
-//		super.init()
-//	}
-	
-	override init(frame frameRect: NSRect) {
-		super.init(frame: frameRect)
-	}
-
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
 	}
 	
 	override func awakeFromNib() {
 		calculatorController.display = self
-		self.foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
-		self.displayFont = self.loadFont("hpfont")
-//		self.segmentPaths = self.loadSegmentPaths("hpchar")
-		self.segmentPaths = bezierPaths()
-		self.annunciatorFont = NSFont(name: "Menlo", size:self.annunciatorFontScale * self.annunciatorFontSize)
-		self.annunciatorPositions = self.calculateAnnunciatorPositions(font: self.annunciatorFont!, inRect: self.bounds)
-		self.on = true
-		self.updateCountdown = 2
+		foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
+		displayFont = loadFont("hpfont")
+//		segmentPaths = loadSegmentPaths("hpchar")
+		segmentPaths = bezierPaths()
+		annunciatorFont = NSFont(name: "Menlo", size:annunciatorFontScale * annunciatorFontSize)
+		annunciatorPositions = calculateAnnunciatorPositions(font: annunciatorFont!, inRect: bounds)
+		on = true
+		updateCountdown = 2
 		bus.installPeripheral(self, inSlot: 0xFD)
 		bus.display = self
 		
-		for idx in 0..<self.numDisplayCells {
-			self.registers.A[idx] = 0xA
-			self.registers.B[idx] = 0x3
-			self.registers.C[idx] = 0x2
-			self.registers.E = 0xfff
+		for idx in 0..<numDisplayCells {
+			registers.A[idx] = 0xA
+			registers.B[idx] = 0x3
+			registers.C[idx] = 0x2
+			registers.E = 0xfff
 		}
 		
 		//-- initialize the display character to unicode lookup table:
@@ -160,7 +148,7 @@ class Display : NSView, Peripheral {
 		let filename: String = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
 		let mString: NSMutableString = try! NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue)
 		CTULookup = String(mString)
-		CTULookupLength = (CTULookup!).characters.count
+		CTULookupLength = (CTULookup!).count
 	}
 
 	override var isFlipped:Bool{
@@ -186,9 +174,9 @@ class Display : NSView, Peripheral {
 				NSGraphicsContext.restoreGraphicsState()
 			}
 			
-			self.lockFocus()
+			lockFocus()
 			let attrs = [
-				NSFontAttributeName: annunciatorFont!
+                NSAttributedString.Key.font: annunciatorFont!
 			]
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
@@ -215,7 +203,7 @@ class Display : NSView, Peripheral {
 					NSGraphicsContext.restoreGraphicsState()
 				}
 			}
-			self.unlockFocus()
+			unlockFocus()
 		}
 	}
 	
@@ -697,7 +685,7 @@ class Display : NSView, Peripheral {
 		var totalWidth: CGFloat = 0.0
 		
 		let attrs = [
-			NSFontAttributeName: annunciatorFont!
+            NSAttributedString.Key.font: annunciatorFont!
 		]
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString

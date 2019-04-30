@@ -494,7 +494,7 @@ extension Display {
 	}
 	
 	func cellWidth() -> CGFloat {
-		return self.bounds.size.width / CGFloat(numDisplayCells)
+		return bounds.size.width / CGFloat(numDisplayCells)
 	}
 	
 	// Read the current content of the display as an String:
@@ -502,13 +502,13 @@ extension Display {
 	// unicode string (suppressing leading and trailing spaces).
 	func readDisplayAsText() -> String {
 		// access the hardware display registers A, B, C:
-		let r  = registers
+		let r = registers
 		
 		// we need up to two characters per display cell (character+punctuation):
-		var text: String = ""
+		var text = ""
 		
 		// prepare the punctuation lookup table (8 characters for 3 bit punctuation code)
-		let punct: String = " .:,;???"
+		let punct = " .:,;???"
 		
 		// loop through the display cells and translate their content:
 		for idx in Array((0...numDisplayCells-1).reversed()) {
@@ -542,10 +542,10 @@ extension Display {
 	}
 	
 	func timeSlice(_ timer: Foundation.Timer) {
-		if (updateCountdown > 0) {
+		if updateCountdown > 0 {
 			updateCountdown -= 1
-			if (updateCountdown == 0) {
-				setNeedsDisplay(self.bounds)
+			if updateCountdown == 0 {
+				setNeedsDisplay(bounds)
 			}
 		}
 	}
@@ -607,7 +607,7 @@ extension Display {
 	//MARK: - Peripheral Protocol Method
 	
 	func pluggedIntoBus(_ theBus: Bus?) {
-//		self.aBus = theBus
+//		aBus = theBus
 	}
 	
 	func writeDataFrom(_ data: Digits14) {

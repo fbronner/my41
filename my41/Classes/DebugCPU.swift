@@ -47,17 +47,17 @@ class DebugCPUViewController: NSViewController {
 	var debugContainerViewController: DebugContainerViewController?
 	
 	override func viewDidLoad() {
-		self.cpuRegistersView.wantsLayer = true
-		self.cpuRegistersView.layer?.masksToBounds = true
-		self.cpuRegistersView.layer?.borderWidth = 2.0
-		self.cpuRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
-		self.cpuRegistersView.layer?.cornerRadius = 6.0
+		cpuRegistersView.wantsLayer = true
+		cpuRegistersView.layer?.masksToBounds = true
+		cpuRegistersView.layer?.borderWidth = 2.0
+		cpuRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
+		cpuRegistersView.layer?.cornerRadius = 6.0
 		
-		self.displayRegistersView.wantsLayer = true
-		self.displayRegistersView.layer?.masksToBounds = true
-		self.displayRegistersView.layer?.borderWidth = 2.0
-		self.displayRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
-		self.displayRegistersView.layer?.cornerRadius = 6.0
+		displayRegistersView.wantsLayer = true
+		displayRegistersView.layer?.masksToBounds = true
+		displayRegistersView.layer?.borderWidth = 2.0
+		displayRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
+		displayRegistersView.layer?.cornerRadius = 6.0
 		
 		cpu.debugCPUViewController = self
 		
@@ -71,7 +71,7 @@ class DebugCPUViewController: NSViewController {
 		updateDisplay()
 	}
 	
-	func updateDisplay() {
+    @objc func updateDisplay() {
 		populateCPURegisters()
 		populateDisplayRegisters()
 	}
@@ -127,7 +127,7 @@ class DebugCPUViewController: NSViewController {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for _ in 0..<toSize - string.characters.count {
+		for _ in 0..<toSize - string.count {
 			padded = "0" + padded
 		}
 		return padded
@@ -151,15 +151,13 @@ class DebugCPUViewController: NSViewController {
 	
 	@IBAction func traceAction(sender: AnyObject)
 	{
-		if sender as! NSObject == traceSwitch {
-			if traceSwitch.state == NSOnState {
-				TRACE = 1
-			} else {
-				TRACE = 0
-			}
-			let defaults = UserDefaults.standard
-			defaults.set(TRACE, forKey: "traceActive")
-			defaults.synchronize()
-		}
+        if traceSwitch.state == NSControl.StateValue.on {
+            TRACE = 1
+        } else {
+            TRACE = 0
+        }
+        let defaults = UserDefaults.standard
+        defaults.set(TRACE, forKey: "traceActive")
+        defaults.synchronize()
 	}
 }

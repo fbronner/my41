@@ -51,7 +51,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		tableView.scrollRowToVisible(0)
 	}
 	
-	func displaySelectedMemoryBank() {
+    @objc func displaySelectedMemoryBank() {
 		displayCurrentRAM(address: bankSelected << 4)
 	}
 	
@@ -158,23 +158,23 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		var value: AnyObject?
 		
-		if tableColumn?.identifier == "avail" {
+		if tableColumn?.identifier.rawValue == "avail" {
 //			if bus.RAMExists(row << 4) {
-			value = NSNumber(value: NSOnState)
+			value = NSNumber(value: NSControl.StateValue.on.rawValue)
 //			} else {
 //				value = NSNumber(integer: NSOffState)
 //			}
 		}
 		
-		if tableColumn?.identifier == "bank" {
+		if tableColumn?.identifier.rawValue == "bank" {
 			value = NSString(format:"0x%.2X", row)
 		}
 		
-		if tableColumn?.identifier == "begins" {
+		if tableColumn?.identifier.rawValue == "begins" {
 			value = NSString(format:"0x%.3X", row << 4)
 		}
 		
-		if tableColumn?.identifier == "ends" {
+		if tableColumn?.identifier.rawValue == "ends" {
 			value = NSString(format:"0x%.3X", (row << 4) + 0x0f)
 		}
 		

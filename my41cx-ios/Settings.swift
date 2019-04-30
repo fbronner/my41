@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
 
 		sound.isOn = SOUND
-		self.yRatio = self.view.bounds.size.height / 800.0
+		yRatio = view.bounds.size.height / 800.0
 	}
 	
 	@IBAction func clearMemory(_ sender: AnyObject) {
@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		}
 		alertController.addAction(cancelAction)
 		alertController.addAction(destructiveAction)
-		self.present(alertController, animated: true, completion: nil)
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction func applyChanges(_ sender: AnyObject) {
@@ -77,7 +77,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		}
 		
 		// Modules
-		if let fPath = self.expansionModule1?.filePath {
+		if let fPath = expansionModule1?.filePath {
 			// We have something in Port1
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort1) {
@@ -100,7 +100,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule2?.filePath {
+		if let fPath = expansionModule2?.filePath {
 			// We have something in Port2
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort2) {
@@ -123,7 +123,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule3?.filePath {
+		if let fPath = expansionModule3?.filePath {
 			// We have something in Port3
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort3) {
@@ -146,7 +146,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule4?.filePath {
+		if let fPath = expansionModule4?.filePath {
 			// We have something in Port4
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort4) {
@@ -226,22 +226,22 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		self.button = UIButton()
+		button = UIButton()
 		super.init(coder: aDecoder)
 
-		self.layer.cornerRadius = 5.0
-		self.button.frame = self.bounds
-		self.button.backgroundColor = UIColor.clear
-		self.button.addTarget(
+		layer.cornerRadius = 5.0
+		button.frame = bounds
+		button.backgroundColor = UIColor.clear
+		button.addTarget(
 			self,
 			action: #selector(MODsView.buttonAction(_:)),
 			for: UIControl.Event.touchUpInside
 		)
-		self.addSubview(self.button)
+		addSubview(button)
 	}
 	
 	@objc func buttonAction(_ sender: AnyObject) {
-		if self.filePath != nil {
+		if filePath != nil {
 			let alertController = UIAlertController(
 				title: "Reset Calculator",
 				message: "What do you want to do with module",
@@ -249,26 +249,26 @@ class MODsView: UIView, UIAlertViewDelegate {
 			)
 
 			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-				if let oldFilePath = self.oldFilePath {
-					self.filePath = oldFilePath
-					self.oldFilePath = nil
+				if let oldFilePath = oldFilePath {
+					filePath = oldFilePath
+					oldFilePath = nil
 				}
 			}
 			let emptyAction = UIAlertAction(title: "Empty port", style: .default) { (result : UIAlertAction) -> Void in
-				self.filePath = nil
-				self.setNeedsDisplay()
+				filePath = nil
+				setNeedsDisplay()
 			}
 			let replaceAction = UIAlertAction(title: "Replace module", style: .default) { (result : UIAlertAction) -> Void in
-				self.oldFilePath = self.filePath
-				self.filePath = nil
-				self.selectModule()
+				oldFilePath = filePath
+				filePath = nil
+				selectModule()
 			}
 			alertController.addAction(cancelAction)
 			alertController.addAction(emptyAction)
 			alertController.addAction(replaceAction)
 			settingsViewController?.present(alertController, animated: true, completion: nil)
 		} else {
-			self.selectModule()
+			selectModule()
 		}
 	}
 	
@@ -279,19 +279,19 @@ class MODsView: UIView, UIAlertViewDelegate {
 			preferredStyle: .alert
 		)
 
-		self.reloadModFiles()
+		reloadModFiles()
 		for (_, element) in modFiles.enumerated() {
 			let modAction = UIAlertAction(title: (element as NSString).lastPathComponent, style: .default) { (result : UIAlertAction) -> Void in
-				self.filePath = element
-				self.oldFilePath = nil
-				self.setNeedsDisplay()
+				filePath = element
+				oldFilePath = nil
+				setNeedsDisplay()
 			}
 			alertController.addAction(modAction)
 		}
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-			if let oldFilePath = self.oldFilePath {
-				self.filePath = oldFilePath
-				self.oldFilePath = nil
+			if let oldFilePath = oldFilePath {
+				filePath = oldFilePath
+				oldFilePath = nil
 			}
 		}
 		alertController.addAction(cancelAction)
@@ -306,10 +306,10 @@ class MODsView: UIView, UIAlertViewDelegate {
 			alpha: 0.95
 		)
 		let rect = CGRect(
-			x: self.bounds.origin.x + 3,
-			y: self.bounds.origin.y + 3,
-			width: self.bounds.size.width - 6,
-			height: self.bounds.size.height - 6
+			x: bounds.origin.x + 3,
+			y: bounds.origin.y + 3,
+			width: bounds.size.width - 6,
+			height: bounds.size.height - 6
 		)
 		
 		let path = UIBezierPath(
@@ -333,7 +333,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 			do {
 				try mod.readModFromFile(fPath)
 				mod.moduleHeader.title.draw(
-					in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
+					in: CGRect(x: 10.0, y: 10.0, width: bounds.size.width - 20.0, height: bounds.size.height - 20.0),
 					withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attributes)
 				)
 			} catch {
@@ -342,7 +342,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		} else {
 			let title = "Empty module"
 			title.draw(
-				in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
+				in: CGRect(x: 10.0, y: 10.0, width: bounds.size.width - 20.0, height: bounds.size.height - 20.0),
 				withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attributes)
 			)
 
@@ -418,10 +418,10 @@ class MODDetailsView: UIView {
 			alpha: 0.95
 		)
 		let rect = CGRect(
-			x: self.bounds.origin.x + 3.0,
-			y: self.bounds.origin.y + 3.0,
-			width: self.bounds.size.width - 6.0,
-			height: self.bounds.size.height - 6.0
+			x: bounds.origin.x + 3.0,
+			y: bounds.origin.y + 3.0,
+			width: bounds.size.width - 6.0,
+			height: bounds.size.height - 6.0
 		)
 		let path = UIBezierPath(
 			roundedRect: rect,

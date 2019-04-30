@@ -93,11 +93,11 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
-		let aView = self.view as! CalculatorView
+		let aView = view as! CalculatorView
 		aView.viewController = self
 		
-//		self.view.layer.cornerRadius = 6.0
-		self.view.backgroundColor = UIColor(red: 0.221, green: 0.221, blue: 0.221, alpha: 1.0)
+//		view.layer.cornerRadius = 6.0
+		view.backgroundColor = UIColor(red: 0.221, green: 0.221, blue: 0.221, alpha: 1.0)
 		
 		displayBackgroundView.backgroundColor = UIColor.lightGray
 		displayBackgroundView.layer.cornerRadius = 3.0
@@ -131,9 +131,9 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			SYNCHRONYZE = defaults.bool(forKey: "synchronyzeTime")
 		}
 		
-		self.setNeedsStatusBarAppearanceUpdate()
+		setNeedsStatusBarAppearanceUpdate()
 		
-		self.yRatio = self.view.bounds.size.height / 800.0
+		yRatio = view.bounds.size.height / 800.0
 		
 		my41CX.titleLabel?.font = UIFont(name: "Helvetica", size: 22.0 * yRatio)
 
@@ -740,10 +740,10 @@ class KeyboardView : UIView {
 		//// Bezier Drawing
 		let bezierPath = UIBezierPath()
 		bezierPath.move(to: CGPoint(x: 5.0, y: 0.0))
-		bezierPath.addLine(to: CGPoint(x: self.bounds.width - 5.0, y: 0.0))
-		bezierPath.addCurve(to: CGPoint(x: self.bounds.width - 5.0, y: self.bounds.height), controlPoint1: CGPoint(x: self.bounds.width, y: self.bounds.height / 2.0), controlPoint2: CGPoint(x: self.bounds.width - 5.0, y: self.bounds.height))
-		bezierPath.addLine(to: CGPoint(x: 5.0, y: self.bounds.height))
-		bezierPath.addCurve(to: CGPoint(x: 5.0, y: 0.0), controlPoint1: CGPoint(x: 0.0, y: self.bounds.height / 2.0), controlPoint2: CGPoint(x: 5.0, y: 0.0))
+		bezierPath.addLine(to: CGPoint(x: bounds.width - 5.0, y: 0.0))
+		bezierPath.addCurve(to: CGPoint(x: bounds.width - 5.0, y: bounds.height), controlPoint1: CGPoint(x: bounds.width, y: bounds.height / 2.0), controlPoint2: CGPoint(x: bounds.width - 5.0, y: bounds.height))
+		bezierPath.addLine(to: CGPoint(x: 5.0, y: bounds.height))
+		bezierPath.addCurve(to: CGPoint(x: 5.0, y: 0.0), controlPoint1: CGPoint(x: 0.0, y: bounds.height / 2.0), controlPoint2: CGPoint(x: 5.0, y: 0.0))
 		color.setStroke()
 		bezierPath.lineWidth = 2
 		bezierPath.stroke()
@@ -757,10 +757,10 @@ class CalculatorView: UIView {
 	var pressedKey: Key?
 	
 	override func awakeFromNib() {
-		var rect = self.bounds
+		var rect = bounds
 		rect.origin.x = 0.0
 		rect.origin.y = 0.0
-		self.setNeedsDisplay(rect)
+		setNeedsDisplay(rect)
 		
 		NotificationCenter.default.addObserver(
 			self,
