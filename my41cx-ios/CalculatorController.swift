@@ -11,7 +11,7 @@ import Foundation
 class CalculatorController : Calculator {
 	static let sharedInstance = CalculatorController()
 	
-	override init() {
+	private override init() {
 		super.init()
 	}
 }

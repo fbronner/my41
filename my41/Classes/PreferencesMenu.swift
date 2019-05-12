@@ -17,10 +17,10 @@ class PreferencesMenuViewController: NSViewController {
 	
 	@IBOutlet weak var menuView: NSView!
 	
-	override func viewWillAppear() {
-	}
-	
+
 	override func viewDidLayout() {
+        super.viewDidLayout()
+
 		if calculatorView != nil {
 			calculatorView?.removeFromSuperview()
 		}
@@ -74,23 +74,31 @@ class PreferencesMenuViewController: NSViewController {
 }
 
 class PreferencesMenuView: NSView {
+
 	override func awakeFromNib() {
-		let viewLayer: CALayer = CALayer()
-		viewLayer.backgroundColor = CGColor(red: 0.9843, green: 0.9804, blue: 0.9725, alpha: 1.0)
+        super.awakeFromNib()
+
+		let viewLayer = CALayer()
+		viewLayer.backgroundColor = NSColor.gridColor.cgColor
 		wantsLayer = true
 		layer = viewLayer
 	}
+
 }
 
 //MARK: -
 
 class PreferencesMenuLabelView: NSView {
+
 	override func awakeFromNib() {
-		let viewLayer: CALayer = CALayer()
-		viewLayer.backgroundColor = CGColor(red: 0.8843, green: 0.8804, blue: 0.8725, alpha: 1.0)
+        super.awakeFromNib()
+
+		let viewLayer = CALayer()
+		viewLayer.backgroundColor = NSColor.selectedTextBackgroundColor.cgColor
 		wantsLayer = true
 		layer = viewLayer
 	}
+
 }
 
 class SelectedPreferencesView: NSView {
@@ -153,4 +161,5 @@ class SelectedPreferencesView: NSView {
 			}
 		}
 	}
+    
 }

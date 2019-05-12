@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class DebugMenuViewController: NSViewController {
+final class DebugMenuViewController: NSViewController {
 	var registersView: SelectedDebugView?
 	var memoryView: SelectedDebugView?
 	var debugContainerViewController: DebugContainerViewController?
@@ -17,6 +17,8 @@ class DebugMenuViewController: NSViewController {
 	@IBOutlet weak var menuView: NSView!
 	
 	override func viewWillAppear() {
+        super.viewWillAppear()
+
 		view.layer = CALayer()
 		view.layer?.backgroundColor = NSColor(calibratedRed: 0.4824, green: 0.6667, blue: 0.2941, alpha: 1.0).cgColor
 		view.wantsLayer = true
@@ -51,11 +53,11 @@ class DebugMenuViewController: NSViewController {
 	}
 }
 
-class DebugerMenuView: NSView {
+final class DebugerMenuView: NSView {
 	
 }
 
-class SelectedDebugView: NSView {
+final class SelectedDebugView: NSView {
 	var text: NSString?
 	var selected: Bool?
 	
@@ -115,16 +117,21 @@ class SelectedDebugView: NSView {
 			}
 		}
 	}
+
 }
 
 
 //MARK: -
 
-class DebugMenuLabelView: NSView {
+final class DebugMenuLabelView: NSView {
+
 	override func awakeFromNib() {
-		let viewLayer: CALayer = CALayer()
-		viewLayer.backgroundColor = CGColor(red: 0.5412, green: 0.7098, blue: 0.3804, alpha: 1.0)
+        super.awakeFromNib()
+
+		let viewLayer = CALayer()
+		viewLayer.backgroundColor = NSColor.selectedTextBackgroundColor.cgColor
 		wantsLayer = true
 		layer = viewLayer
 	}
+
 }

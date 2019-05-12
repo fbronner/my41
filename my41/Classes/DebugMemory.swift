@@ -9,9 +9,9 @@
 import Foundation
 import Cocoa
 
-class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+final class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	var debugContainerViewController: DebugContainerViewController?
-	var bankSelected: Int = 0
+	var bankSelected = 0
 
 	@IBOutlet weak var memory0: NSTextField!
 	@IBOutlet weak var memory1: NSTextField!
@@ -32,22 +32,22 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	@IBOutlet weak var tableView: NSTableView!
 	
 	override func awakeFromNib() {
+        super.awakeFromNib()
+
 		cpu.debugMemoryViewController = self
 	}
 	
 	override func viewDidLoad() {
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(DebugMemoryViewController.displaySelectedMemoryBank),
-			name: NSNotification.Name(rawValue: kMemoryDebugUpdateDisplay),
-			object: nil
-		)
+        super.viewDidLoad()
+
+		NotificationCenter.default.addObserver(self, selector: #selector(displaySelectedMemoryBank), name: .kMemoryDebugUpdateDisplay, object: nil)
 
 	}
 	
 	override func viewDidAppear() {
-		let indexSet = NSIndexSet(index: 0)
-		tableView.selectRowIndexes(indexSet as IndexSet, byExtendingSelection: false)
+        super.viewDidAppear()
+
+        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
 		tableView.scrollRowToVisible(0)
 	}
 	

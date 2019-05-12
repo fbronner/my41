@@ -119,6 +119,8 @@ final class AlphaKeyboardViewController: NSViewController {
 	@IBOutlet weak var buttonRS: Key!
 
 	override func viewWillAppear() {
+        super.viewWillAppear()
+        
 		view.layer = CALayer()
 		view.layer?.backgroundColor = NSColor(calibratedRed: 0.221, green: 0.221, blue: 0.221, alpha: 1.0).cgColor
 		view.wantsLayer = true
@@ -339,13 +341,11 @@ final class AlphaKeyboardViewController: NSViewController {
 						]
 					)
 				} else {
-					return NSMutableAttributedString(string: aString,
-                                                     attributes: [NSAttributedString.Key.font : actualFont
-						]
-					)
+					return NSMutableAttributedString(string: aString, attributes: [NSAttributedString.Key.font : actualFont])
 				}
 			} else {
 				return NSMutableAttributedString()
 			}
 	}
+
 }

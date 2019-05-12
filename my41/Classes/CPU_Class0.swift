@@ -1463,7 +1463,7 @@ func op_DISOFF() -> Bit																// DISOFF
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which turns off the display.
 	*/
-	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayOff"), object: nil)
+	NotificationCenter.default.post(name: .displayOff, object: nil)
 	
 	return 0
 }
@@ -1490,7 +1490,7 @@ func op_DISTOG() -> Bit																// DISTOG
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which toggles the display.
 	*/
-	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayToggle"), object: nil)
+	NotificationCenter.default.post(name: .displayToggle, object: nil)
 	
 	return 0
 }

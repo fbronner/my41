@@ -43,6 +43,8 @@ class Display: UIView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
+        super.awakeFromNib()
+
 		backgroundColor = .clear
 		calculatorController.display = self
 		displayFont = loadFont("hpfont")

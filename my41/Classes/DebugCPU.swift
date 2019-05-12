@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class DebugCPUViewController: NSViewController {
+final class DebugCPUViewController: NSViewController {
 	@IBOutlet weak var cpuRegistersView: NSView!
 	@IBOutlet weak var cpuRegisterA: NSTextField!
 	@IBOutlet weak var cpuRegisterB: NSTextField!
@@ -47,6 +47,8 @@ class DebugCPUViewController: NSViewController {
 	var debugContainerViewController: DebugContainerViewController?
 	
 	override func viewDidLoad() {
+        super.viewDidLoad()
+
 		cpuRegistersView.wantsLayer = true
 		cpuRegistersView.layer?.masksToBounds = true
 		cpuRegistersView.layer?.borderWidth = 2.0
@@ -61,12 +63,7 @@ class DebugCPUViewController: NSViewController {
 		
 		cpu.debugCPUViewController = self
 		
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(DebugCPUViewController.updateDisplay),
-			name: NSNotification.Name(rawValue: kCPUDebugUpdateDisplay),
-			object: nil
-		)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateDisplay), name: .kCPUDebugUpdateDisplay, object: nil)
 		
 		updateDisplay()
 	}
@@ -84,19 +81,25 @@ class DebugCPUViewController: NSViewController {
 		cpuRegisterN.stringValue = cpu.digitsToString(cpu.reg.N.digits)
 		cpuRegisterP.stringValue = cpu.bits4ToString(cpu.reg.P)
 		cpuRegisterQ.stringValue = cpu.bits4ToString(cpu.reg.Q)
-		cpuRegisterPC.stringValue = NSString(format:"%04X", cpu.reg.PC) as String
+		cpuRegisterPC.stringValue = String(format:"%04X", cpu.reg.PC)
 		cpuRegisterG.stringValue = cpu.digitsToString(cpu.reg.G)
-		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T) as String
+		cpuRegisterT.stringValue = String(format:"%02X", cpu.reg.T)
 		let strXST = String(cpu.reg.XST, radix:2)
-		cpuRegisterXST.stringValue = pad(string: strXST, toSize: 6)
+		cpuRegisterXST.stringValue = strXST.pad(toSize: 4)
 		let strST = String(cpu.reg.ST, radix:2)
-		cpuRegisterST.stringValue = pad(string: strST, toSize: 8)
-		if cpu.reg.R == 0 {
-			cpuRegisterR.stringValue = "P"
-		} else {
-			cpuRegisterR.stringValue = "Q"
-		}
-		switch cpu.powerMode {
+		cpuRegisterST.stringValue = strST.pad(toSize: 8)
+        cpuRegisterR.stringValue = cpu.reg.R == 0 ? "P" : "Q"
+        cpuRegisterCarry.stringValue = cpu.reg.carry == 0 ? "T" : "F"
+        cpuStack1.stringValue = String(format:"%04X", cpu.reg.stack[0])
+        cpuStack2.stringValue = String(format:"%04X", cpu.reg.stack[1])
+        cpuStack3.stringValue = String(format:"%04X", cpu.reg.stack[2])
+        cpuStack4.stringValue = String(format:"%04X", cpu.reg.stack[3])
+        cpuRegisterKY.stringValue = String(format:"%02X", cpu.reg.KY)
+        cpuRegisterFI.stringValue = String(format:"%04X", cpu.reg.FI)
+        cpuSelectedRAM.stringValue = String(format:"%03X", cpu.reg.ramAddress)
+        cpuSelectedPeripheral.stringValue = String(format:"%02X", cpu.reg.peripheral)
+
+        switch cpu.powerMode {
 		case .deepSleep:
 			cpuPowerMode.stringValue = "D"
 		case .lightSleep:
@@ -104,33 +107,13 @@ class DebugCPUViewController: NSViewController {
 		case .powerOn:
 			cpuPowerMode.stringValue = "P"
 		}
-		if cpu.reg.carry == 0 {
-			cpuRegisterCarry.stringValue = "T"
-		} else {
-			cpuRegisterCarry.stringValue = "F"
-		}
+
 		switch cpu.reg.mode {
 		case .dec_mode:
 			cpuMode.stringValue = "D"
 		case .hex_mode:
 			cpuMode.stringValue = "H"
 		}
-		cpuStack1.stringValue = NSString(format:"%04X", cpu.reg.stack[0]) as String
-		cpuStack2.stringValue = NSString(format:"%04X", cpu.reg.stack[1]) as String
-		cpuStack3.stringValue = NSString(format:"%04X", cpu.reg.stack[2]) as String
-		cpuStack4.stringValue = NSString(format:"%04X", cpu.reg.stack[3]) as String
-		cpuRegisterKY.stringValue = NSString(format:"%02X", cpu.reg.KY) as String
-		cpuRegisterFI.stringValue = NSString(format:"%04X", cpu.reg.FI) as String
-		cpuSelectedRAM.stringValue = NSString(format:"%03X", cpu.reg.ramAddress) as String
-		cpuSelectedPeripheral.stringValue = NSString(format:"%02X", cpu.reg.peripheral) as String
-	}
-	
-	func pad(string : String, toSize: Int) -> String {
-		var padded = string
-		for _ in 0..<toSize - string.count {
-			padded = "0" + padded
-		}
-		return padded
 	}
 	
 	func populateDisplayRegisters() {
@@ -149,15 +132,9 @@ class DebugCPUViewController: NSViewController {
 		}
 	}
 	
-	@IBAction func traceAction(sender: AnyObject)
-	{
-        if traceSwitch.state == NSControl.StateValue.on {
-            TRACE = 1
-        } else {
-            TRACE = 0
-        }
-        let defaults = UserDefaults.standard
-        defaults.set(TRACE, forKey: "traceActive")
-        defaults.synchronize()
+	@IBAction func traceAction(sender: AnyObject) {
+        TRACE = traceSwitch.state == NSControl.StateValue.on ? 1 : 0
+        UserDefaults.standard.set(TRACE, forKey: "traceActive")
 	}
+
 }

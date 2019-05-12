@@ -93,6 +93,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
 		let aView = view as! CalculatorView
 		aView.viewController = self
 		
@@ -667,11 +669,6 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
 	override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .lightContent
 	}
@@ -750,30 +747,22 @@ class KeyboardView : UIView {
 	}
 }
 
-class CalculatorView: UIView {
+final class CalculatorView: UIView {
 	@IBOutlet weak var lcdDisplay: Display!
 	
 	var viewController: iOSViewController?
 	var pressedKey: Key?
 	
 	override func awakeFromNib() {
+        super.awakeFromNib()
+        
 		var rect = bounds
 		rect.origin.x = 0.0
 		rect.origin.y = 0.0
 		setNeedsDisplay(rect)
 		
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(CalculatorView.displayOff),
-			name: NSNotification.Name(rawValue: "displayOff"),
-			object: nil
-		)
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(CalculatorView.displayToggle),
-			name: NSNotification.Name(rawValue: "displayToggle"),
-			object: nil
-		)
+		NotificationCenter.default.addObserver(self,selector: #selector(displayOff), name: .displayOff, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(displayToggle), name: .displayToggle, object: nil)
 	}
 	
 	@objc func displayOff() {

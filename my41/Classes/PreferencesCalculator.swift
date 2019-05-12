@@ -9,7 +9,9 @@
 import Foundation
 import Cocoa
 
-class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate {
+final class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate {
+    static let segueId = "showSelectCalculatorView"
+
 	@IBOutlet weak var calculatorSelector: NSComboBox!
 	@IBOutlet weak var printerButton: NSButton!
 	@IBOutlet weak var cardReaderButton: NSButton!
@@ -19,6 +21,8 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	var preferencesContainerViewController: PreferencesContainerViewController?
 
 	override func viewDidLoad() {
+        super.viewDidLoad()
+
 		let defaults = UserDefaults.standard
 		
 		let cType = defaults.integer(forKey: HPCalculatorType)
@@ -81,4 +85,5 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 			}
 		}
 	}
+    
 }

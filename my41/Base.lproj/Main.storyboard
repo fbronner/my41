@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1961,17 +1962,17 @@ CA
                                 <rect key="frame" x="0.0" y="282" width="194" height="97"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DNa-Rc-XTc">
-                                        <rect key="frame" x="18" y="37" width="67" height="24"/>
+                                        <rect key="frame" x="64" y="37" width="67" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Debug" id="Yeh-lc-ALA">
                                             <font key="font" metaFont="systemBold" size="20"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" red="0.54117647059999996" green="0.70980392160000005" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" name="selectedTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="DNa-Rc-XTc" firstAttribute="centerX" secondItem="caD-3z-kXS" secondAttribute="centerX" id="K98-HK-maj"/>
                                     <constraint firstAttribute="centerY" secondItem="DNa-Rc-XTc" secondAttribute="centerY" constant="0.5" id="Pgp-iP-GEn"/>
-                                    <constraint firstItem="DNa-Rc-XTc" firstAttribute="leading" secondItem="caD-3z-kXS" secondAttribute="leading" constant="20" id="VA2-iy-UiT"/>
                                     <constraint firstAttribute="height" constant="97" id="Vf7-Dx-yED"/>
                                 </constraints>
                             </customView>
@@ -2079,7 +2080,7 @@ CA
                                         <rect key="frame" x="43" y="278" width="149" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="jQw-JO-caC">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2095,7 +2096,7 @@ CA
                                         <rect key="frame" x="43" y="248" width="149" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="BUl-eN-08l">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2111,7 +2112,7 @@ CA
                                         <rect key="frame" x="43" y="218" width="149" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="44R-qr-gr2">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2127,7 +2128,7 @@ CA
                                         <rect key="frame" x="43" y="188" width="149" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="gMY-1T-grs">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2143,7 +2144,7 @@ CA
                                         <rect key="frame" x="43" y="158" width="149" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="qJd-k8-Jfg">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2159,7 +2160,7 @@ CA
                                         <rect key="frame" x="43" y="128" width="24" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00" id="zR0-3C-7vZ">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2175,7 +2176,7 @@ CA
                                         <rect key="frame" x="43" y="98" width="62" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000" id="I82-85-mnf">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2191,7 +2192,7 @@ CA
                                         <rect key="frame" x="168" y="128" width="24" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00" id="axz-fH-aRy">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2199,7 +2200,7 @@ CA
                                         <rect key="frame" x="168" y="100" width="81" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00000000" id="ok3-Fy-ZUG">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2207,7 +2208,7 @@ CA
                                         <rect key="frame" x="197" y="36" width="33" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000" id="42r-GF-Css">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2215,7 +2216,7 @@ CA
                                         <rect key="frame" x="264" y="128" width="24" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00" id="85S-pM-fjl">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2247,7 +2248,7 @@ CA
                                         <rect key="frame" x="114" y="66" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="L" id="X19-ur-sOc">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2263,7 +2264,7 @@ CA
                                         <rect key="frame" x="264" y="279" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0" id="4vX-ly-Qdk">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2279,7 +2280,7 @@ CA
                                         <rect key="frame" x="264" y="248" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0" id="wAe-Mc-GOj">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2327,7 +2328,7 @@ CA
                                         <rect key="frame" x="264" y="218" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="P" id="fTn-fG-tN3">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2335,7 +2336,7 @@ CA
                                         <rect key="frame" x="264" y="188" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="F" id="NVK-7b-ojv">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2343,7 +2344,7 @@ CA
                                         <rect key="frame" x="264" y="158" width="14" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="H" id="np8-UV-abP">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2399,7 +2400,7 @@ CA
                                         <rect key="frame" x="333" y="278" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="aSg-sb-JT0">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2407,7 +2408,7 @@ CA
                                         <rect key="frame" x="333" y="218" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="Jah-tI-vHb">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2415,7 +2416,7 @@ CA
                                         <rect key="frame" x="333" y="188" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="7Ey-iF-rLa">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2423,7 +2424,7 @@ CA
                                         <rect key="frame" x="333" y="158" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="Crt-ff-oAV">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2431,7 +2432,7 @@ CA
                                         <rect key="frame" x="333" y="128" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="u9o-tW-udP">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2439,7 +2440,7 @@ CA
                                         <rect key="frame" x="333" y="98" width="43" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000" id="pcK-qo-Zih">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2447,7 +2448,7 @@ CA
                                         <rect key="frame" x="206" y="5" width="24" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00" id="2E3-CD-c7r">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2585,7 +2586,7 @@ CA
                                         <rect key="frame" x="37" y="10" width="129" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000000000000" id="pUP-Jv-S1d">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2601,7 +2602,7 @@ CA
                                         <rect key="frame" x="37" y="42" width="129" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000000000000" id="Yj1-tp-egP">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2625,7 +2626,7 @@ CA
                                         <rect key="frame" x="37" y="73" width="129" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000000000000" id="GAk-bH-mm7">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2633,7 +2634,7 @@ CA
                                         <rect key="frame" x="207" y="75" width="33" height="23"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000" id="sZK-kH-tkj">
                                             <font key="font" size="16" name="CourierNewPS-BoldMT"/>
-                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -2838,7 +2839,7 @@ CA
                                 <rect key="frame" x="288" y="340" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="FeD-9r-1dO">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2854,7 +2855,7 @@ CA
                                 <rect key="frame" x="287" y="319" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="2sF-oH-DPI">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2870,7 +2871,7 @@ CA
                                 <rect key="frame" x="287" y="298" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="wcF-gd-SyV">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2886,7 +2887,7 @@ CA
                                 <rect key="frame" x="287" y="277" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="WIQ-BF-jfj">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2902,7 +2903,7 @@ CA
                                 <rect key="frame" x="287" y="256" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="B6x-TR-lbX">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2918,7 +2919,7 @@ CA
                                 <rect key="frame" x="287" y="235" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="pOK-fG-5OC">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2934,7 +2935,7 @@ CA
                                 <rect key="frame" x="287" y="214" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="sYR-nH-hiF">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2950,7 +2951,7 @@ CA
                                 <rect key="frame" x="287" y="193" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="hm2-lh-QZh">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2966,7 +2967,7 @@ CA
                                 <rect key="frame" x="287" y="172" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="afj-mp-Huy">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2982,7 +2983,7 @@ CA
                                 <rect key="frame" x="287" y="151" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="ifa-VP-TI4">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -2998,7 +2999,7 @@ CA
                                 <rect key="frame" x="287" y="130" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="For-DL-Gio">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3014,7 +3015,7 @@ CA
                                 <rect key="frame" x="287" y="109" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="XeD-HM-1hh">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3030,7 +3031,7 @@ CA
                                 <rect key="frame" x="287" y="88" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="f7N-b4-Kmm">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3046,7 +3047,7 @@ CA
                                 <rect key="frame" x="287" y="67" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="TYZ-UK-gRx">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3062,7 +3063,7 @@ CA
                                 <rect key="frame" x="287" y="46" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="weL-NA-HVO">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3078,7 +3079,7 @@ CA
                                 <rect key="frame" x="287" y="25" width="122" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="000000000000000" id="I8I-Na-Q7h">
                                     <font key="font" size="13" name="CourierNewPS-BoldMT"/>
-                                    <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -3213,10 +3214,10 @@ CA
                                 <rect key="frame" x="0.0" y="490" width="194" height="97"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-AF-k86">
-                                        <rect key="frame" x="18" y="38" width="104" height="21"/>
+                                        <rect key="frame" x="45" y="38" width="104" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preferences" id="4HN-zd-ioG">
                                             <font key="font" metaFont="systemBold" size="17"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -3224,7 +3225,7 @@ CA
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="rCy-AF-k86" secondAttribute="centerY" id="5Dt-6m-6Ke"/>
                                     <constraint firstAttribute="height" constant="97" id="XR0-Ub-Abn"/>
-                                    <constraint firstItem="rCy-AF-k86" firstAttribute="leading" secondItem="rCA-8k-D3D" secondAttribute="leading" constant="20" id="cbv-cx-fAh"/>
+                                    <constraint firstItem="rCy-AF-k86" firstAttribute="centerX" secondItem="rCA-8k-D3D" secondAttribute="centerX" id="puT-BF-rBo"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="k7e-hs-JvD">
@@ -3400,7 +3401,7 @@ CA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-wj-yaY">
-                                <rect key="frame" x="-2" y="550" width="204" height="17"/>
+                                <rect key="frame" x="6" y="550" width="204" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Available Modules" id="KMa-KL-uMe">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3408,16 +3409,16 @@ CA
                                 </textFieldCell>
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJy-7T-HX4">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="547"/>
+                                <rect key="frame" x="8" y="16" width="200" height="526"/>
                                 <clipView key="contentView" id="kSI-IA-TGA">
-                                    <rect key="frame" x="1" y="1" width="198" height="545"/>
+                                    <rect key="frame" x="1" y="1" width="198" height="524"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" viewBased="YES" id="Um9-vd-qXl">
-                                            <rect key="frame" x="0.0" y="0.0" width="198" height="545"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198" height="524"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="modFile" width="195" minWidth="40" maxWidth="1000" id="tay-fS-1R3">
@@ -3474,7 +3475,7 @@ CA
                                 </scroller>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZJF-Vo-Fek" customClass="ExpansionView" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="208" y="440" width="140" height="107"/>
+                                <rect key="frame" x="216" y="435" width="140" height="107"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="vzy-YU-QzJ">
                                         <rect key="frame" x="106" y="5" width="32" height="32"/>
@@ -3499,7 +3500,7 @@ CA
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="1fV-01-P73" customClass="ExpansionView" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="368" y="440" width="140" height="107"/>
+                                <rect key="frame" x="376" y="435" width="140" height="107"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="tKj-bz-fht">
                                         <rect key="frame" x="106" y="5" width="32" height="32"/>
@@ -3522,7 +3523,7 @@ CA
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Bxx-iw-LuF" customClass="ExpansionView" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="208" y="325" width="140" height="107"/>
+                                <rect key="frame" x="216" y="320" width="140" height="107"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="gul-0c-d6K">
                                         <rect key="frame" x="106" y="5" width="32" height="32"/>
@@ -3534,6 +3535,7 @@ CA
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                         <connections>
                                             <action selector="removeModule3ActionWithSender:" target="x80-zU-PA8" id="qtt-T7-Lwj"/>
                                         </connections>
@@ -3545,7 +3547,7 @@ CA
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="IPp-lN-M7T" customClass="ExpansionView" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="368" y="325" width="140" height="107"/>
+                                <rect key="frame" x="376" y="320" width="140" height="107"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="3d8-dQ-5AL">
                                         <rect key="frame" x="106" y="5" width="32" height="32"/>
@@ -3568,50 +3570,50 @@ CA
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="j5h-SM-xmm" customClass="ModDetailsView" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="208" y="103" width="300" height="194"/>
+                                <rect key="frame" x="216" y="82" width="300" height="210"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9PZ-zh-g0j">
-                                        <rect key="frame" x="9" y="121" width="46" height="20"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author" id="qvF-vG-wvU">
+                                        <rect key="frame" x="8" y="132" width="82" height="20"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Author" id="qvF-vG-wvU">
                                             <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qhf-vC-Ewk">
-                                        <rect key="frame" x="9" y="93" width="50" height="20"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="hjv-re-0lF">
+                                        <rect key="frame" x="8" y="104" width="82" height="20"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Version" id="hjv-re-0lF">
                                             <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xtr-yq-NNH">
-                                        <rect key="frame" x="7" y="65" width="65" height="20"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copyright" id="ZZM-92-elw">
+                                        <rect key="frame" x="6" y="76" width="84" height="20"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Copyright" id="ZZM-92-elw">
                                             <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sIC-0w-Vb7">
-                                        <rect key="frame" x="7" y="37" width="61" height="20"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Category" id="cJz-uV-cQ6">
+                                        <rect key="frame" x="6" y="48" width="84" height="20"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Category" id="cJz-uV-cQ6">
                                             <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Jv-VU-kmt">
-                                        <rect key="frame" x="7" y="9" width="65" height="20"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hardware" id="Ysd-iD-5qj">
+                                        <rect key="frame" x="6" y="20" width="84" height="20"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Hardware" id="Ysd-iD-5qj">
                                             <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZXX-Ik-ffP">
-                                        <rect key="frame" x="76" y="121" width="45" height="17"/>
+                                        <rect key="frame" x="94" y="132" width="200" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author" id="DeH-sL-SfY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3619,7 +3621,7 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Su-jq2">
-                                        <rect key="frame" x="76" y="93" width="50" height="17"/>
+                                        <rect key="frame" x="94" y="104" width="200" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="4jL-ma-hFg">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3627,7 +3629,7 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o06-6N-0Vt">
-                                        <rect key="frame" x="76" y="65" width="64" height="17"/>
+                                        <rect key="frame" x="94" y="76" width="200" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copyright" id="25b-5X-iVK">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3635,7 +3637,7 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DaK-Jf-RzY">
-                                        <rect key="frame" x="76" y="37" width="60" height="17"/>
+                                        <rect key="frame" x="94" y="48" width="200" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Category" id="Mld-lO-nW2">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3643,7 +3645,7 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZz-un-yOd">
-                                        <rect key="frame" x="76" y="9" width="63" height="17"/>
+                                        <rect key="frame" x="94" y="20" width="200" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hardware" id="nJ5-z3-ffM">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3651,10 +3653,9 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFY-Za-jWM">
-                                        <rect key="frame" x="9" y="149" width="284" height="40"/>
+                                        <rect key="frame" x="8" y="160" width="284" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="280" id="R6E-je-Xyw"/>
-                                            <constraint firstAttribute="height" constant="40" id="zIL-OM-5zj"/>
+                                            <constraint firstAttribute="height" constant="30" id="zIL-OM-5zj"/>
                                         </constraints>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="XVU-hK-73O">
                                             <font key="font" size="14" name="HelveticaNeue-Bold"/>
@@ -3665,35 +3666,47 @@ CA
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="sIC-0w-Vb7" firstAttribute="top" secondItem="Xtr-yq-NNH" secondAttribute="bottom" constant="8" id="136-Bd-5xd"/>
-                                    <constraint firstAttribute="width" constant="300" id="72s-Ul-5eE"/>
-                                    <constraint firstItem="o06-6N-0Vt" firstAttribute="leading" secondItem="Xtr-yq-NNH" secondAttribute="trailing" constant="8" id="7XY-us-506"/>
                                     <constraint firstItem="qhf-vC-Ewk" firstAttribute="bottom" secondItem="Alj-Su-jq2" secondAttribute="bottom" id="H5N-Ca-KPe"/>
+                                    <constraint firstItem="9PZ-zh-g0j" firstAttribute="width" secondItem="ZXX-Ik-ffP" secondAttribute="width" multiplier="0.4" id="KWn-17-cfl"/>
                                     <constraint firstItem="DaK-Jf-RzY" firstAttribute="leading" secondItem="o06-6N-0Vt" secondAttribute="leading" id="KzP-IE-6Ju"/>
                                     <constraint firstItem="DaK-Jf-RzY" firstAttribute="bottom" secondItem="sIC-0w-Vb7" secondAttribute="bottom" id="OLJ-lZ-sn6"/>
-                                    <constraint firstItem="9PZ-zh-g0j" firstAttribute="top" secondItem="dFY-Za-jWM" secondAttribute="bottom" constant="8" id="QXm-u8-hl1"/>
+                                    <constraint firstItem="9PZ-zh-g0j" firstAttribute="top" secondItem="dFY-Za-jWM" secondAttribute="bottom" constant="8" symbolic="YES" id="QXm-u8-hl1"/>
                                     <constraint firstItem="Xtr-yq-NNH" firstAttribute="bottom" secondItem="o06-6N-0Vt" secondAttribute="bottom" id="QxC-vk-zqu"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Jv-VU-kmt" secondAttribute="bottom" constant="20" symbolic="YES" id="SUi-e4-AHr"/>
+                                    <constraint firstItem="qhf-vC-Ewk" firstAttribute="trailing" secondItem="9PZ-zh-g0j" secondAttribute="trailing" id="UZ3-cE-ryA"/>
                                     <constraint firstItem="DaK-Jf-RzY" firstAttribute="leading" secondItem="fZz-un-yOd" secondAttribute="leading" id="V30-UQ-814"/>
+                                    <constraint firstItem="o06-6N-0Vt" firstAttribute="trailing" secondItem="Alj-Su-jq2" secondAttribute="trailing" id="XEF-vt-6xj"/>
                                     <constraint firstItem="ZXX-Ik-ffP" firstAttribute="bottom" secondItem="9PZ-zh-g0j" secondAttribute="bottom" id="XWV-DX-Weu"/>
                                     <constraint firstItem="Xtr-yq-NNH" firstAttribute="top" secondItem="qhf-vC-Ewk" secondAttribute="bottom" constant="8" id="Xod-A9-4D6"/>
                                     <constraint firstItem="6Jv-VU-kmt" firstAttribute="leading" secondItem="sIC-0w-Vb7" secondAttribute="leading" id="Za0-uI-QaX"/>
+                                    <constraint firstItem="sIC-0w-Vb7" firstAttribute="trailing" secondItem="Xtr-yq-NNH" secondAttribute="trailing" id="bZ7-q8-9pV"/>
+                                    <constraint firstItem="fZz-un-yOd" firstAttribute="trailing" secondItem="DaK-Jf-RzY" secondAttribute="trailing" id="hZk-8h-208"/>
                                     <constraint firstItem="qhf-vC-Ewk" firstAttribute="leading" secondItem="Xtr-yq-NNH" secondAttribute="leading" constant="2" id="ig5-xm-svX"/>
+                                    <constraint firstItem="DaK-Jf-RzY" firstAttribute="trailing" secondItem="o06-6N-0Vt" secondAttribute="trailing" id="ijN-gY-YVS"/>
                                     <constraint firstItem="qhf-vC-Ewk" firstAttribute="leading" secondItem="9PZ-zh-g0j" secondAttribute="leading" id="jbD-5w-B3b"/>
-                                    <constraint firstItem="dFY-Za-jWM" firstAttribute="top" secondItem="j5h-SM-xmm" secondAttribute="top" constant="5" id="lbg-4C-xVg"/>
-                                    <constraint firstAttribute="height" constant="194" id="lsr-yj-w4c"/>
+                                    <constraint firstItem="dFY-Za-jWM" firstAttribute="top" secondItem="j5h-SM-xmm" secondAttribute="top" constant="20" symbolic="YES" id="lbg-4C-xVg"/>
+                                    <constraint firstItem="ZXX-Ik-ffP" firstAttribute="leading" secondItem="9PZ-zh-g0j" secondAttribute="trailing" constant="8" id="luz-Ur-hqc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZXX-Ik-ffP" secondAttribute="trailing" constant="8" id="mRp-3P-oXX"/>
                                     <constraint firstItem="6Jv-VU-kmt" firstAttribute="top" secondItem="sIC-0w-Vb7" secondAttribute="bottom" constant="8" id="nwG-Eb-plD"/>
                                     <constraint firstItem="sIC-0w-Vb7" firstAttribute="leading" secondItem="Xtr-yq-NNH" secondAttribute="leading" id="oZI-9h-EGP"/>
-                                    <constraint firstItem="dFY-Za-jWM" firstAttribute="leading" secondItem="j5h-SM-xmm" secondAttribute="leading" constant="11" id="om2-MA-1fg"/>
+                                    <constraint firstItem="dFY-Za-jWM" firstAttribute="leading" secondItem="j5h-SM-xmm" secondAttribute="leading" constant="10" id="om2-MA-1fg"/>
+                                    <constraint firstItem="6Jv-VU-kmt" firstAttribute="trailing" secondItem="sIC-0w-Vb7" secondAttribute="trailing" id="onF-u1-cjX"/>
                                     <constraint firstItem="qhf-vC-Ewk" firstAttribute="top" secondItem="9PZ-zh-g0j" secondAttribute="bottom" constant="8" id="pbS-ld-A6T"/>
+                                    <constraint firstItem="Xtr-yq-NNH" firstAttribute="trailing" secondItem="qhf-vC-Ewk" secondAttribute="trailing" id="rJj-6a-ZZY"/>
                                     <constraint firstItem="ZXX-Ik-ffP" firstAttribute="leading" secondItem="o06-6N-0Vt" secondAttribute="leading" id="uky-EZ-OFk"/>
                                     <constraint firstItem="6Jv-VU-kmt" firstAttribute="bottom" secondItem="fZz-un-yOd" secondAttribute="bottom" id="vWL-O2-UOt"/>
-                                    <constraint firstItem="9PZ-zh-g0j" firstAttribute="leading" secondItem="j5h-SM-xmm" secondAttribute="leading" constant="11" id="wIk-Uv-I21"/>
-                                    <constraint firstAttribute="trailing" secondItem="dFY-Za-jWM" secondAttribute="trailing" constant="9" id="xgQ-13-aHr"/>
+                                    <constraint firstItem="9PZ-zh-g0j" firstAttribute="leading" secondItem="j5h-SM-xmm" secondAttribute="leading" constant="10" id="wIk-Uv-I21"/>
+                                    <constraint firstItem="Alj-Su-jq2" firstAttribute="trailing" secondItem="ZXX-Ik-ffP" secondAttribute="trailing" id="wLi-XX-ACV"/>
+                                    <constraint firstAttribute="trailing" secondItem="dFY-Za-jWM" secondAttribute="trailing" constant="10" id="xgQ-13-aHr"/>
                                     <constraint firstItem="ZXX-Ik-ffP" firstAttribute="leading" secondItem="Alj-Su-jq2" secondAttribute="leading" id="yEm-oL-OZU"/>
                                 </constraints>
                             </customView>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2X5-UW-K6R">
-                                <rect key="frame" x="447" y="20" width="61" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="2X5-UW-K6R">
+                                <rect key="frame" x="455" y="17" width="61" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="Uyk-Jk-KRZ"/>
+                                    <constraint firstAttribute="height" constant="25" id="aDB-nq-4C1"/>
+                                </constraints>
                                 <buttonCell key="cell" type="square" title="Apply" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bTj-gG-Gc8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3704,11 +3717,12 @@ CA
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ZJy-7T-HX4" firstAttribute="top" secondItem="PT2-wj-yaY" secondAttribute="bottom" constant="3" id="1Bh-3O-57Q"/>
+                            <constraint firstItem="ZJy-7T-HX4" firstAttribute="top" secondItem="PT2-wj-yaY" secondAttribute="bottom" constant="8" id="1Bh-3O-57Q"/>
+                            <constraint firstItem="j5h-SM-xmm" firstAttribute="leading" secondItem="Bxx-iw-LuF" secondAttribute="leading" id="1QU-kf-lBG"/>
                             <constraint firstItem="1fV-01-P73" firstAttribute="height" secondItem="Bxx-iw-LuF" secondAttribute="height" id="1sa-dQ-zxx"/>
-                            <constraint firstAttribute="bottom" secondItem="ZJy-7T-HX4" secondAttribute="bottom" id="2AQ-Eb-D1j"/>
-                            <constraint firstItem="j5h-SM-xmm" firstAttribute="leading" secondItem="REV-Rq-qUb" secondAttribute="leading" constant="208" id="6X8-fN-HTO"/>
-                            <constraint firstItem="ZJy-7T-HX4" firstAttribute="leading" secondItem="REV-Rq-qUb" secondAttribute="leading" id="Coe-l1-K3F"/>
+                            <constraint firstAttribute="bottom" secondItem="ZJy-7T-HX4" secondAttribute="bottom" constant="16" id="2AQ-Eb-D1j"/>
+                            <constraint firstItem="2X5-UW-K6R" firstAttribute="trailing" secondItem="j5h-SM-xmm" secondAttribute="trailing" id="CfG-Ty-vwO"/>
+                            <constraint firstItem="ZJy-7T-HX4" firstAttribute="leading" secondItem="REV-Rq-qUb" secondAttribute="leading" constant="8" id="Coe-l1-K3F"/>
                             <constraint firstItem="j5h-SM-xmm" firstAttribute="top" secondItem="IPp-lN-M7T" secondAttribute="bottom" constant="28" id="DOb-YQ-pa7"/>
                             <constraint firstItem="ZJy-7T-HX4" firstAttribute="width" secondItem="PT2-wj-yaY" secondAttribute="width" id="DTh-1N-E7l"/>
                             <constraint firstItem="1fV-01-P73" firstAttribute="leading" secondItem="ZJF-Vo-Fek" secondAttribute="trailing" constant="20" id="FIr-Ij-0Df"/>
@@ -3720,9 +3734,11 @@ CA
                             <constraint firstItem="1fV-01-P73" firstAttribute="height" secondItem="ZJF-Vo-Fek" secondAttribute="height" id="UKc-kL-Csf"/>
                             <constraint firstItem="1fV-01-P73" firstAttribute="top" secondItem="ZJF-Vo-Fek" secondAttribute="top" id="Wns-FF-LxG"/>
                             <constraint firstItem="PT2-wj-yaY" firstAttribute="top" secondItem="REV-Rq-qUb" secondAttribute="top" constant="20" id="Yby-uM-Cmb"/>
+                            <constraint firstItem="2X5-UW-K6R" firstAttribute="bottom" secondItem="Um9-vd-qXl" secondAttribute="bottom" id="b55-Se-1VB"/>
+                            <constraint firstItem="j5h-SM-xmm" firstAttribute="trailing" secondItem="IPp-lN-M7T" secondAttribute="trailing" id="ft9-G3-wjr"/>
                             <constraint firstItem="ZJF-Vo-Fek" firstAttribute="leading" secondItem="ZJy-7T-HX4" secondAttribute="trailing" constant="8" id="h6n-Nd-gcY"/>
                             <constraint firstItem="1fV-01-P73" firstAttribute="leading" secondItem="Bxx-iw-LuF" secondAttribute="leading" constant="160" id="k64-wQ-8aC"/>
-                            <constraint firstItem="PT2-wj-yaY" firstAttribute="leading" secondItem="REV-Rq-qUb" secondAttribute="leading" id="lf0-jy-RIY"/>
+                            <constraint firstItem="PT2-wj-yaY" firstAttribute="leading" secondItem="REV-Rq-qUb" secondAttribute="leading" constant="8" id="lf0-jy-RIY"/>
                             <constraint firstItem="IPp-lN-M7T" firstAttribute="top" secondItem="Bxx-iw-LuF" secondAttribute="top" id="qM0-jM-Sj5"/>
                             <constraint firstItem="IPp-lN-M7T" firstAttribute="leading" secondItem="Bxx-iw-LuF" secondAttribute="trailing" constant="20" id="tbR-ok-BWA"/>
                             <constraint firstItem="ZJy-7T-HX4" firstAttribute="top" secondItem="ZJF-Vo-Fek" secondAttribute="top" id="ww3-Ry-nCK"/>

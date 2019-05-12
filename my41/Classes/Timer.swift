@@ -349,9 +349,9 @@ class Timer : Peripheral {
 		}
 		
 		// alert for an alarm
-//		if fAlert != 0 {
-//			// I'll make the dock icon bounce
-//			NSApp.requestUserAttention(NSInformationalRequest)
-//		}
+//        if fAlert != 0 {
+//            // I'll make the dock icon bounce
+//            NSApp.requestUserAttention(NSInformationalRequest)
+//        }
 	}
 }

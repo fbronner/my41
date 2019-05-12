@@ -9,18 +9,18 @@
 import Foundation
 
 extension String {
-	subscript(integerIndex: Int) -> Character {
-		let index = self.index(startIndex, offsetBy: integerIndex)
-//		let index = advance(startIndex, integerIndex)
-			return self[index]
-	}
-	
-	subscript(integerRange: Range<Int>) -> String {
-		let start = index(startIndex, offsetBy: integerRange.lowerBound)
-		let end = index(startIndex, offsetBy: integerRange.upperBound)
-//		let start = advance(startIndex, integerRange.startIndex)
-//		let end = advance(startIndex, integerRange.endIndex)
-		let range = start..<end
-		return String(self[range])
-	}
+
+    subscript(integerIndex: Int) -> Character {
+        return self[self.index(startIndex, offsetBy: integerIndex)]
+    }
+
+    func pad(with string: String = "0", toSize: Int) -> String {
+        var padded = self
+        for _ in 0..<toSize - count {
+            padded = string + padded
+        }
+
+        return padded
+    }
+
 }

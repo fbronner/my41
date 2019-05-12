@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 import AVFoundation
 
-class Keyboard : NSObject {
+final class Keyboard : NSObject {
 	@IBOutlet weak var functionGroup: KeyGroup!
 	@IBOutlet weak var arithmeticGroup: KeyGroup!
 	@IBOutlet weak var numberGroup: KeyGroup!
@@ -20,16 +20,12 @@ class Keyboard : NSObject {
 	@IBOutlet weak var keyPrgm: Key!
 	@IBOutlet weak var keyAlpha: Key!
 	
-	override init() {
-		super.init()
-	}
-	
 	func keyWithCode(code: Bits8, pressed: Bool) {
 		cpu.keyWithCode(code, pressed: pressed)
 	}
 }
 
-class KeyGroup : NSView {
+final class KeyGroup : NSView {
 	@IBOutlet weak var keyboard: Keyboard!
 	
 	var audioPlayer:AVAudioPlayer? = nil

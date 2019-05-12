@@ -12,23 +12,20 @@ import Cocoa
 typealias DisplayFont = [DisplaySegmentMap]
 typealias DisplaySegmentPaths = [NSBezierPath]
 
-class CalculatorWindowController: NSWindowController {
+final class CalculatorWindowController: NSWindowController {
 	
 }
 
-class CalculatorWindow : NSWindow {
+final class CalculatorWindow : NSWindow {
 	//This point is used in dragging to mark the initial click location
 	var initialLocation: NSPoint?
 
-    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
-		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
-	}
-	
 	override var acceptsFirstResponder: Bool { return true }
 
 	override func awakeFromNib() {
-        let appDelegate =  CalculatorApplication.shared.delegate as! AppDelegate
-		appDelegate.window = self
+        super.awakeFromNib()
+
+ 		(CalculatorApplication.shared.delegate as? AppDelegate)?.window = self
 		
 		isExcludedFromWindowsMenu = false
 		backgroundColor = NSColor.clear
@@ -85,7 +82,7 @@ class CalculatorWindow : NSWindow {
 	}
 }
 
-class Display : NSView, Peripheral {
+final class Display : NSView, Peripheral {
 	let numDisplayCells = 12
 	let numAnnunciators = 12
 	let numDisplaySegments = 17
@@ -117,7 +114,13 @@ class Display : NSView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		calculatorController.display = self
+        super.awakeFromNib()
+
+//        wantsLayer = true
+//        let image = NSImage(named: "hp41")
+//        layer?.contents = image
+
+        calculatorController.display = self
 		foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
 		displayFont = loadFont("hpfont")
 //		segmentPaths = loadSegmentPaths("hpchar")

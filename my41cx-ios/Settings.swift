@@ -22,6 +22,8 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
 		let defaults = UserDefaults.standard
 		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
 
@@ -405,7 +407,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 }
 
-class MODDetailsView: UIView {
+final class MODDetailsView: UIView {
 	var modDetails: ModuleHeader?
 	var category: String?
 	var hardware: String?
@@ -431,6 +433,7 @@ class MODDetailsView: UIView {
 		backColor.setFill()
 		path.fill()
 	}
+    
 }
 
 // Helper function inserted by Swift 4.2 migrator.

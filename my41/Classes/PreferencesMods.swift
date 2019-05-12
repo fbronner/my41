@@ -9,7 +9,8 @@
 import Foundation
 import Cocoa
 
-class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PreferencesModsViewController: NSViewController {
+    static let segueId = "showModsView"
 	@IBOutlet weak var modTitle: NSTextField!
 	@IBOutlet weak var modAuthor: NSTextField!
 	@IBOutlet weak var modVersion: NSTextField!
@@ -31,11 +32,13 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	@IBOutlet weak var tableView: NSTableView!
 	@IBOutlet weak var modDetailsView: ModDetailsView!
 
-	var modFiles: [String] = [String]()
+	var modFiles: [String] = []
 	var modFileHeaders: [String: ModuleHeader]?
 	var preferencesContainerViewController: PreferencesContainerViewController?
 	
 	override func viewDidLoad() {
+        super.viewDidLoad()
+
 		expansionModule1.preferencesModsViewController = self
 		expansionModule2.preferencesModsViewController = self
 		expansionModule3.preferencesModsViewController = self
@@ -64,7 +67,6 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		reloadModFiles()
 		if modFiles.count > 0 {
-			tableView.reloadData()
 			tableView.selectRowIndexes(NSIndexSet(index: 0) as IndexSet, byExtendingSelection: false)
 			selectedRow(row: 0)
 		}
@@ -111,8 +113,8 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 			modAuthor.stringValue = modDetails.author
 			modVersion.stringValue = modDetails.version
 			modCopyright.stringValue = modDetails.copyright
-			modCategory.stringValue = modDetailsView.category!
-			modHardware.stringValue = modDetailsView.hardware!
+			modCategory.stringValue = modDetailsView.category ?? "N/A"
+			modHardware.stringValue = modDetailsView.hardware ?? "N/A"
 		}
 	}
 	
@@ -139,7 +141,6 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	// MARK: -
 	func modFilesInBundle() -> [String] {
-//		let resourceURL = NSBundle.mainBundle().resourceURL
 		let modFiles = Bundle.main.paths(forResourcesOfType: "mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
@@ -198,45 +199,53 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		preferencesContainerViewController?.applyChanges()
 	}
 	
-	
-	//MARK: - NSTableViewDataSource Methods
-	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-		return modFiles.count
-	}
-	
-	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-		let filePath = modFiles[row]
-		
-		var cellView: NSTableCellView?
-		if let tColumn = tableColumn {
-            let cView = tableView.makeView(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
-			cView.textField?.stringValue = (filePath as NSString).lastPathComponent
-			cellView = cView
-		}
-		
-		return cellView
-	}
-	
-	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-		selectedRow(row: row)
-		
-		return true
-	}
-
-	func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-		if rowIndexes.count > 1 {
-			return false
-		} else {
-//			let title = modDetailsView.modDetails?.title
-			let row = rowIndexes.first
-			let filePath = modFiles[row!]
-            pboard.setString(filePath, forType: NSPasteboard.PasteboardType.string)
-			
-			return true
-		}
-	}
 }
 
+//MARK: - NSTableViewDataSource Methods
+extension PreferencesModsViewController: NSTableViewDataSource {
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return modFiles.count
+    }
+
+}
+
+//MARK: - NSTableViewDelegate Methods
+extension PreferencesModsViewController: NSTableViewDelegate {
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let filePath = modFiles[row]
+
+        var cellView: NSTableCellView?
+        if let tColumn = tableColumn {
+            let cView = tableView.makeView(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
+            cView.textField?.stringValue = (filePath as NSString).lastPathComponent.replacingOccurrences(of: ".mod", with: "").capitalized
+            cellView = cView
+        }
+
+        return cellView
+    }
+
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        selectedRow(row: row)
+
+        return true
+    }
+
+    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+        if rowIndexes.count > 1 {
+            return false
+        } else {
+            //            let title = modDetailsView.modDetails?.title
+            let row = rowIndexes.first
+            let filePath = modFiles[row!]
+            pboard.setString(filePath, forType: NSPasteboard.PasteboardType.string)
+
+            return true
+        }
+    }
+
+}
 
 class ModDetailsView: NSView {
 	var modDetails: ModuleHeader?
@@ -244,15 +253,15 @@ class ModDetailsView: NSView {
 	var hardware: String?
 	
 	override func draw(_ dirtyRect: NSRect) {
-		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
+		let backColor = NSColor(named: "backgroundLight") ?? NSColor.darkGray
 		let rect = NSMakeRect(bounds.origin.x + 3, bounds.origin.y + 3, bounds.size.width - 6, bounds.size.height - 6)
-		
 		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
-		
+
 		backColor.setFill()
 		path.fill()
 	}
+
 }
 
 class ExpansionView: NSView {
@@ -264,8 +273,8 @@ class ExpansionView: NSView {
 	
 	var preferencesModsViewController: PreferencesModsViewController!
 	
-	convenience init(port: Int) {
-		self.init()
+    convenience init(port: Int) {
+        self.init()
 		
 		let defaults = UserDefaults.standard
 		switch port {
@@ -297,6 +306,8 @@ class ExpansionView: NSView {
 	}
 	
 	override func awakeFromNib() {
+        super.awakeFromNib()
+        
 		let theArray = [
             NSPasteboard.PasteboardType.string
 		]
@@ -406,4 +417,5 @@ class ExpansionView: NSView {
 	override func concludeDragOperation(_ sender: NSDraggingInfo?) {
 		setNeedsDisplay(bounds)
 	}
+    
 }

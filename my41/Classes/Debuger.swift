@@ -9,16 +9,18 @@
 import Foundation
 import Cocoa
 
-class DebugWindowController: NSWindowController {
+final class DebugWindowController: NSWindowController {
 	
 }
 
 
 // MARK: - SpitView
 
-class DebugSplitViewController: NSSplitViewController {
+final class DebugSplitViewController: NSSplitViewController {
 	
 	override func viewWillAppear() {
+        super.viewWillAppear()
+
 		let menuVC = splitViewItems[0].viewController as! DebugMenuViewController
 		let containerVC = splitViewItems[1].viewController as! DebugContainerViewController
 		menuVC.debugContainerViewController = containerVC
@@ -68,9 +70,10 @@ class DebugSplitViewController: NSSplitViewController {
 			)
 		)
 	}
+    
 }
 
-class DebugContainerViewController: NSViewController {
+final class DebugContainerViewController: NSViewController {
 	var debugCPUViewController: DebugCPUViewController?
 	var debugMemoryViewController: DebugMemoryViewController?
 
@@ -88,6 +91,8 @@ class DebugContainerViewController: NSViewController {
 	}
 	
 	override func viewDidLoad() {
+        super.viewDidLoad()
+
 		loadCPUViewController()
 		let defaults = UserDefaults.standard
 		TRACE = defaults.integer(forKey: "traceActive")
@@ -105,12 +110,14 @@ class DebugContainerViewController: NSViewController {
 	func loadMemoryViewController() {
 		performSegue(withIdentifier: "showMemoryView", sender: self)
 	}
+
 }
 
 
 //MARK: -
 
-class DebugerSegue: NSStoryboardSegue {
+final class DebugerSegue: NSStoryboardSegue {
+
 	override func perform() {
 		let source = sourceController as! NSViewController
 		let destination = destinationController as! NSViewController
@@ -141,4 +148,5 @@ class DebugerSegue: NSStoryboardSegue {
 			)
 		)
 	}
+
 }

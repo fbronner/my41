@@ -8,8 +8,13 @@
 
 import Foundation
 
-let kCPUDebugUpdateDisplay = "com.my41cx.debuger.cpudebugupdatedisplay"
-let kMemoryDebugUpdateDisplay = "com.my41cx.debuger.memorydebugupdatedisplay"
+extension Notification.Name {
+    static let kCPUDebugUpdateDisplay = Notification.Name("com.my41cx.debuger.cpudebugupdatedisplay")
+    static let kMemoryDebugUpdateDisplay = Notification.Name("com.my41cx.debuger.memorydebugupdatedisplay")
+    static let displayOff = Notification.Name("displayOff")
+    static let displayOn = Notification.Name("displayOn")
+    static let displayToggle = Notification.Name("displayToggle")
+}
 
 enum ArithOp {
 	case add

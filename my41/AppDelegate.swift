@@ -27,12 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 	}
 
-	func applicationWillResignActive(_ notification: Notification) {
-	}
-
-	func applicationWillBecomeActive(_ notification: Notification) {
-	}
-
 	func applicationWillTerminate(_ notification: Notification) {
 		CalculatorController.sharedInstance.saveMemory()
 		CalculatorController.sharedInstance.saveCPU()
@@ -45,14 +39,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		CalculatorController.sharedInstance.resetCalculator(restoringMemory: false)
 	}
 	
-	func application(_ app: NSApplication, willEncodeRestorableState coder: NSCoder) {
-		// Implement this functionality
-	}
-	
-	func application(_ app: NSApplication, didDecodeRestorableState coder: NSCoder) {
-		// Implement this functionality
-	}
-
 	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
 		return true
 	}

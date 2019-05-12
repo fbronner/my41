@@ -128,15 +128,20 @@ final class ViewController: NSViewController {
 	@IBOutlet weak var calculatorLabel: NSTextField!
 		
 	override func viewWillAppear() {
+        super.viewWillAppear()
+
 		becomeFirstResponder()
 		
 		let aView = view as! CalculatorView
 		aView.viewController = self
 
-		view.layer = CALayer()
-		view.layer?.cornerRadius = 6.0
-		view.layer?.backgroundColor = NSColor(calibratedRed: 0.221, green: 0.221, blue: 0.221, alpha: 1.0).cgColor
-		view.wantsLayer = true
+//        view.layer = CALayer()
+//        view.layer?.cornerRadius = 6.0
+//        view.layer?.backgroundColor = NSColor(named: "background")?.cgColor
+//        view.wantsLayer = true
+        view.wantsLayer = true
+        let image = NSImage(named: "hp41")
+        view.layer?.contents = image
 
 		displayBackgroundView.layer = CALayer()
 		displayBackgroundView.layer?.backgroundColor = NSColor.lightGray.cgColor
@@ -144,518 +149,511 @@ final class ViewController: NSViewController {
 		displayBackgroundView.wantsLayer = true
 		
 		// ON
-		buttonCellOn.upperText = mutableAttributedStringFromString(aString: "ON", color: .white)
-		
-		// USER
-		buttonCellUSER.upperText = mutableAttributedStringFromString(aString: "USER", color: .white)
-		
-		// PRGM
-		buttonCellPRGM.upperText = mutableAttributedStringFromString(aString: "PRGM", color: .white)
-		
-		// ALPHA
-		buttonCellALPHA.upperText = mutableAttributedStringFromString(aString: "ALPHA", color: .white)
-
-		// Label Σ-
-		let Helvetica13Font = NSFont(name: "Helvetica", size: 13.0)
-		if let actualFont = Helvetica13Font {
-			let sigmaMinusString = mutableAttributedStringFromString(aString: "Σ-", color: nil)
-            let sigmaMinusAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 1
-				]
-			sigmaMinusString.addAttributes(sigmaMinusAttributes, range: NSMakeRange(1, 1))
-			labelSigmaMinus.attributedStringValue = sigmaMinusString
-		}
-		
-		// Button Σ+
-		let sigmaPlusString = mutableAttributedStringFromString(aString: "Σ+", color: .white)
-		let sigmaPlusAttributes = [
-            NSAttributedString.Key.baselineOffset: 1
-		]
-		sigmaPlusString.addAttributes(sigmaPlusAttributes, range: NSMakeRange(1, 1))
-		buttonCellSigmaPlus.upperText = sigmaPlusString
-		
-		// Label yx
-		let TimesNewRoman10Font = NSFont(name: "Times New Roman", size: 10.0)
-		if let actualFont = TimesNewRoman10Font {
-			let yxString = mutableAttributedStringFromString(aString: "yx", color: nil)
-			let yxAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			yxString.addAttributes(yxAttributes, range: NSMakeRange(1, 1))
-			labelYX.attributedStringValue = yxString
-		}
-		
-		// Button 1/x
-		if let actualFont = TimesNewRoman10Font {
-			let oneXString = mutableAttributedStringFromString(aString: "1/x", color: .white)
-			let oneXAttributes = [
-                NSAttributedString.Key.font : actualFont,
-			]
-			oneXString.addAttributes(oneXAttributes, range: NSMakeRange(2, 1))
-			buttonCellOneX.upperText = oneXString
-		}
-		
-		// Label x^2
-		let TimesNewRoman12Font = NSFont(name: "Times New Roman", size: 12.0)
-		if let actualFont = TimesNewRoman12Font {
-			let xSquareString = mutableAttributedStringFromString(aString: "x\u{00B2}", color: nil)
-			let xSquareAttributes = [
-                NSAttributedString.Key.font : actualFont,
-			]
-			xSquareString.addAttributes(xSquareAttributes, range: NSMakeRange(0, 2))
-			labelXSquare.attributedStringValue = xSquareString
-		}
-		
-		// Button √x
-		if let actualFont = TimesNewRoman10Font {
-			let rootXString = mutableAttributedStringFromString(aString: "√x\u{0304}", color: .white)
-			let rootXAttributes1 = [
-                NSAttributedString.Key.baselineOffset: 1
-			]
-			rootXString.addAttributes(rootXAttributes1, range: NSMakeRange(2, 1))
-			let rootXAttributes2 = [
-                NSAttributedString.Key.font : actualFont,
-			]
-			rootXString.addAttributes(rootXAttributes2, range: NSMakeRange(1, 1))
-			buttonCellSquareRoot.upperText = rootXString
-		}
-		
-		// Label 10^x
-		if let actualFont = TimesNewRoman10Font {
-			let tenXString = mutableAttributedStringFromString(aString: "10x", color: nil)
-			let tenXAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			tenXString.addAttributes(tenXAttributes, range: NSMakeRange(2, 1))
-			labelTenX.attributedStringValue = tenXString
-		}
-		
-		// Button LOG
-		buttonCellLog.upperText = mutableAttributedStringFromString(aString: "LOG", color: .white)
-		
-		// Label e^x
-		let Helvetica12Font = NSFont(name: "Helvetica", size: 12.0)
-		if let actualFont = TimesNewRoman10Font {
-			let eXString = mutableAttributedStringFromString(aString: "ex", color: nil)
-			let eXAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			
-			if let actualFont2 = Helvetica12Font {
-				eXString.addAttributes(eXAttributes, range: NSMakeRange(1, 1))
-				let eXAttributes2 = [
-                    NSAttributedString.Key.font : actualFont2
-				]
-				eXString.addAttributes(eXAttributes2, range: NSMakeRange(0, 1))
-				labelEX.attributedStringValue = eXString
-			}
-		}
-		
-		// Button LN
-		buttonCellLn.upperText = mutableAttributedStringFromString(aString: "LN", color: .white)
-		
-		// Label CLΣ
-		labelCLSigma.attributedStringValue = mutableAttributedStringFromString(aString: "CLΣ", color: nil)
-		
-		// Button x≷y
-		let TimesNewRoman14Font = NSFont(name: "Times New Roman", size: 14.0)
-		if let actualFont = TimesNewRoman14Font {
-			let XexYString = mutableAttributedStringFromString(aString: "x≷y", color: .white)
-			let XexYAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 1
-				]
-			XexYString.addAttributes(XexYAttributes, range: NSMakeRange(0, 3))
-			buttonCellXexY.upperText = XexYString
-		}
-		
-		// Label %
-		labelPercent.attributedStringValue = mutableAttributedStringFromString(aString: "%", color: nil)
-		
-		// Button R↓
-		buttonCellRArrrow.upperText = mutableAttributedStringFromString(aString: "R↓", color: .white)
-		
-		// Label SIN-1
-		let TimesNewRoman09Font = NSFont(name: "Times New Roman", size: 9.0)
-		if let actualFont = TimesNewRoman09Font {
-			let sin1String = mutableAttributedStringFromString(aString: "SIN-1", color: nil)
-			let sinAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			sin1String.addAttributes(sinAttributes, range: NSMakeRange(3, 2))
-			labelSin.attributedStringValue = sin1String
-		}
-		
-		// Button SIN
-		buttonCellSin.upperText = mutableAttributedStringFromString(aString: "SIN", color: .white)
-		
-		// Label COS-1
-		if let actualFont = TimesNewRoman09Font {
-			let cos1String = mutableAttributedStringFromString(aString: "COS-1", color: nil)
-			let cosAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			cos1String.addAttributes(cosAttributes, range: NSMakeRange(3, 2))
-			labelCos.attributedStringValue = cos1String
-		}
-		
-		// Button COS
-		buttonCellCos.upperText = mutableAttributedStringFromString(aString: "COS", color: .white)
-		
-		// Label TAN-1
-		if let actualFont = TimesNewRoman09Font {
-			let tan1String = mutableAttributedStringFromString(aString: "TAN-1", color: nil)
-			let tanAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 4
-				]
-			tan1String.addAttributes(tanAttributes, range: NSMakeRange(3, 2))
-			labelTan.attributedStringValue = tan1String
-		}
-		
-		// Button TAN
-		buttonCellTan.upperText = mutableAttributedStringFromString(aString: "TAN", color: .white)
-		
-		// Label ASN
-		labelASN.attributedStringValue = mutableAttributedStringFromString(aString: "ASN", color: nil)
-		
-		// Button XEQ
-		buttonCellXEQ.upperText = mutableAttributedStringFromString(aString: "XEQ", color: .white)
-		
-		// Label LBL
-		labelLBL.attributedStringValue = mutableAttributedStringFromString(aString: "LBL", color: nil)
-		
-		// Button STO
-		buttonCellSTO.upperText = mutableAttributedStringFromString(aString: "STO", color: .white)
-		
-		// Label GTO
-		labelGTO.attributedStringValue = mutableAttributedStringFromString(aString: "GTO", color: nil)
-		
-		// Button RCL
-		buttonCellRCL.upperText = mutableAttributedStringFromString(aString: "RCL", color: .white)
-		
-		// Label BST
-		labelBST.attributedStringValue = mutableAttributedStringFromString(aString: "BST", color: nil)
-		
-		// Button SST
-		buttonCellSST.upperText = mutableAttributedStringFromString(aString: "SST", color: .white)
-		
-		// Label CATALOG
-		labelCATALOG.attributedStringValue = mutableAttributedStringFromString(aString: "CATALOG", color: nil)
-		
-		// Button ENTER
-		buttonCellENTER.upperText = mutableAttributedStringFromString(aString: "ENTER ↑", color: .white)
-		
-		// Label ISG
-		labelISG.attributedStringValue = mutableAttributedStringFromString(aString: "ISG", color: nil)
-		
-		// Button CHS
-		buttonCellCHS.upperText = mutableAttributedStringFromString(aString: "CHS", color: .white)
-		
-		// Label RTN
-		labelRTN.attributedStringValue = mutableAttributedStringFromString(aString: "RTN", color: nil)
-		
-		// Button EEX
-		buttonCellEEX.upperText = mutableAttributedStringFromString(aString: "EEX", color: .white)
-		
-		// Label CL X/A
-		let TimesNewRoman11Font = NSFont(name: "Times New Roman", size: 11.0)
-		if let actualFont = TimesNewRoman11Font {
-			let clxaString = mutableAttributedStringFromString(aString: "CL X/A", color: nil)
-			let clxaAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			clxaString.addAttributes(clxaAttributes, range: NSMakeRange(3, 1))
-			labelCLXA.attributedStringValue = clxaString
-		}
-		
-		// Button Back
-		let Helvetica11Font = NSFont(name: "Helvetica", size: 11.0)
-		if let actualFont = Helvetica11Font {
-			let backString = mutableAttributedStringFromString(aString: "←", color: .white)
-			let backAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			backString.addAttributes(backAttributes, range: NSMakeRange(0, 1))
-			buttonCellBack.upperText = backString
-		}
-		
-		// Label x=y ?
-		if let actualFont = TimesNewRoman14Font {
-			let xeqyString = mutableAttributedStringFromString(aString: "x=y ?", color: nil)
-			let xeqyAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			xeqyString.addAttributes(xeqyAttributes, range: NSMakeRange(0, 3))
-			labelXEQY.attributedStringValue = xeqyString
-		}
-		
-		// Button Minus
-		let Helvetica09Font = NSFont(name: "Helvetica", size: 9.0)
-		if let actualFont = Helvetica09Font {
-			let minusString = mutableAttributedStringFromString(aString: "━", color: .white)
-			let minusAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: -1
-				]
-			minusString.addAttributes(minusAttributes, range: NSMakeRange(0, 1))
-			buttonCellMinus.upperText = minusString
-		}
-		
-		// Label x≤y ?
-		let TimesNewRoman13Font = NSFont(name: "Times New Roman", size: 13.0)
-		if let actualFont = TimesNewRoman13Font {
-			let xlessthanyString = mutableAttributedStringFromString(aString: "x≤y ?", color: nil)
-			let xlessthanyAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			xlessthanyString.addAttributes(xlessthanyAttributes, range: NSMakeRange(0, 3))
-			labelXLessThanY.attributedStringValue = xlessthanyString
-		}
-		
-		// Button Plus
-		if let actualFont = Helvetica09Font {
-			let plusString = mutableAttributedStringFromString(aString: "╋", color: .white)
-			let plusAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			plusString.addAttributes(plusAttributes, range: NSMakeRange(0, 1))
-			buttonCellPlus.upperText = plusString
-		}
-		
-		// Label x≥y ?
-		if let actualFont = TimesNewRoman13Font {
-			let xgreaterthanyString = mutableAttributedStringFromString(aString: "x>y ?", color: nil)
-			let xgreaterthanyAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: -1
-				]
-			xgreaterthanyString.addAttributes(xgreaterthanyAttributes, range: NSMakeRange(0, 3))
-			labelXGreaterThanY.attributedStringValue = xgreaterthanyString
-		}
-		
-		// Button Multiply
-		let Helvetica15Font = NSFont(name: "Helvetica", size: 15.0)
-		if let actualFont = Helvetica15Font {
-			let multiplyString = mutableAttributedStringFromString(aString: "×", color: .white)
-			let multiplyAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 1
-				]
-			multiplyString.addAttributes(multiplyAttributes, range: NSMakeRange(0, 1))
-			buttonCellMultiply.upperText = multiplyString
-		}
-		
-		// Label x=0 ?
-		if let actualFont = TimesNewRoman13Font {
-			let xeq0String = mutableAttributedStringFromString(aString: "x=0 ?", color: nil)
-			let xeq0Attributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: -1
-				]
-			xeq0String.addAttributes(xeq0Attributes, range: NSMakeRange(0, 5))
-			labelXEQ0.attributedStringValue = xeq0String
-		}
-		
-		// Button Divide
-		if let actualFont = Helvetica15Font {
-			let divideString = mutableAttributedStringFromString(aString: "÷", color: .white)
-			let divideAttributes: [NSAttributedString.Key: Any] = [
-                .font : actualFont,
-				.baselineOffset: 1
-				]
-			divideString.addAttributes(divideAttributes, range: NSMakeRange(0, 1))
-			buttonCellDivide.upperText = divideString
-		}
-
-		// Label SF
-		labelSF.attributedStringValue = mutableAttributedStringFromString(aString: "SF", color: nil)
-		
-		// Button 7
-		if let actualFont = Helvetica13Font {
-			let sevenString = mutableAttributedStringFromString(aString: "7", color: .white)
-			let sevenAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			sevenString.addAttributes(sevenAttributes, range: NSMakeRange(0, 1))
-			buttonCell7.upperText = sevenString
-		}
-		
-		// Label CF
-		labelCF.attributedStringValue = mutableAttributedStringFromString(aString: "CF", color: nil)
-		
-		// Button 8
-		if let actualFont = Helvetica13Font {
-			let eightString = mutableAttributedStringFromString(aString: "8", color: .white)
-			let eightAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			eightString.addAttributes(eightAttributes, range: NSMakeRange(0, 1))
-			buttonCell8.upperText = eightString
-		}
-		
-		// Label FS?
-		labelFS.attributedStringValue = mutableAttributedStringFromString(aString: "FS?", color: nil)
-		
-		// Button 9
-		if let actualFont = Helvetica13Font {
-			let nineString = mutableAttributedStringFromString(aString: "9", color: .white)
-			let nineAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			nineString.addAttributes(nineAttributes, range: NSMakeRange(0, 1))
-			buttonCell9.upperText = nineString
-		}
-		
-		// Label BEEP
-		labelBEEP.attributedStringValue = mutableAttributedStringFromString(aString: "BEEP", color: nil)
-		
-		// Button 4
-		if let actualFont = Helvetica13Font {
-			let fourString = mutableAttributedStringFromString(aString: "4", color: .white)
-			let fourAttributes: [NSAttributedString.Key: Any] = [
-                NSAttributedString.Key.font : actualFont
-			]
-			fourString.addAttributes(fourAttributes, range: NSMakeRange(0, 1))
-			buttonCell4.upperText = fourString
-		}
-		
-		// Label P→R
-		labelPR.attributedStringValue = mutableAttributedStringFromString(aString: "P→R", color: nil)
-		
-		// Button 5
-		if let actualFont = Helvetica13Font {
-			let fiveString = mutableAttributedStringFromString(aString: "5", color: .white)
-			let fiveAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			fiveString.addAttributes(fiveAttributes, range: NSMakeRange(0, 1))
-			buttonCell5.upperText = fiveString
-		}
-		
-		// Label R→P
-		labelRP.attributedStringValue = mutableAttributedStringFromString(aString: "R→P", color: nil)
-		
-		// Button 6
-		if let actualFont = Helvetica13Font {
-			let sixString = mutableAttributedStringFromString(aString: "6", color: .white)
-			let sixAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			sixString.addAttributes(sixAttributes, range: NSMakeRange(0, 1))
-			buttonCell6.upperText = sixString
-		}
-		
-		// Label FIX
-		labelFIX.attributedStringValue = mutableAttributedStringFromString(aString: "FIX", color: nil)
-		
-		// Button 1
-		if let actualFont = Helvetica13Font {
-			let oneString = mutableAttributedStringFromString(aString: "1", color: .white)
-			let oneAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			oneString.addAttributes(oneAttributes, range: NSMakeRange(0, 1))
-			buttonCell1.upperText = oneString
-		}
-		
-		// Label SCI
-		labelSCI.attributedStringValue = mutableAttributedStringFromString(aString: "SCI", color: nil)
-		
-		// Button 2
-		if let actualFont = Helvetica13Font {
-			let twoString = mutableAttributedStringFromString(aString: "2", color: .white)
-			let twoAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			twoString.addAttributes(twoAttributes, range: NSMakeRange(0, 1))
-			buttonCell2.upperText = twoString
-		}
-		
-		// Label ENG
-		labelENG.attributedStringValue = mutableAttributedStringFromString(aString: "ENG", color: nil)
-		
-		// Button 3
-		if let actualFont = Helvetica13Font {
-			let thtreeString = mutableAttributedStringFromString(aString: "3", color: .white)
-			let thtreeAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			thtreeString.addAttributes(thtreeAttributes, range: NSMakeRange(0, 1))
-			buttonCell3.upperText = thtreeString
-		}
-		
-		// Label PI
-		let TimesNewRoman15Font = NSFont(name: "Times New Roman", size: 15.0)
-		if let actualFont = TimesNewRoman15Font {
-			let piString = mutableAttributedStringFromString(aString: "π", color: nil)
-			let piAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			piString.addAttributes(piAttributes, range: NSMakeRange(0, 1))
-			labelPI.attributedStringValue = piString
-		}
-		
-		// Button 0
-		if let actualFont = Helvetica13Font {
-			let zeroString = mutableAttributedStringFromString(aString: "0", color: .white)
-			let zeroAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			zeroString.addAttributes(zeroAttributes, range: NSMakeRange(0, 1))
-			buttonCell0.upperText = zeroString
-		}
-		
-		// Label LAST X
-		if let actualFont = TimesNewRoman13Font {
-			let lastxString = mutableAttributedStringFromString(aString: "LAST X", color: nil)
-			let lastxAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			lastxString.addAttributes(lastxAttributes, range: NSMakeRange(5, 1))
-			labelLASTX.attributedStringValue = lastxString
-		}
-		
-		// Button •
-		if let actualFont = Helvetica13Font {
-			let pointString = mutableAttributedStringFromString(aString: "•", color: .white)
-			let pointAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			pointString.addAttributes(pointAttributes, range: NSMakeRange(0, 1))
-			buttonCellPoint.upperText = pointString
-		}
-		
-		// Label VIEW
-		labelVIEW.attributedStringValue = mutableAttributedStringFromString(aString: "VIEW", color: nil)
-		
-		// Button R/S
-		if let actualFont = Helvetica12Font {
-			let rsString = mutableAttributedStringFromString(aString: "R/S", color: .white)
-			let rsAttributes = [
-                NSAttributedString.Key.font : actualFont
-			]
-			rsString.addAttributes(rsAttributes, range: NSMakeRange(0, 3))
-			buttonCellRS.upperText = rsString
-		}
-	}
-	
-	// →≤≥
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-
-		// Do any additional setup after loading the view.
-		                            
+//        buttonCellOn.upperText = mutableAttributedStringFromString(aString: "ON", color: .white)
+//
+//        // USER
+//        buttonCellUSER.upperText = mutableAttributedStringFromString(aString: "USER", color: .white)
+//
+//        // PRGM
+//        buttonCellPRGM.upperText = mutableAttributedStringFromString(aString: "PRGM", color: .white)
+//
+//        // ALPHA
+//        buttonCellALPHA.upperText = mutableAttributedStringFromString(aString: "ALPHA", color: .white)
+//
+//        // Label Σ-
+//        let Helvetica13Font = NSFont(name: "Helvetica", size: 13.0)
+//        if let actualFont = Helvetica13Font {
+//            let sigmaMinusString = mutableAttributedStringFromString(aString: "Σ-", color: nil)
+//            let sigmaMinusAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 1
+//                ]
+//            sigmaMinusString.addAttributes(sigmaMinusAttributes, range: NSMakeRange(1, 1))
+//            labelSigmaMinus.attributedStringValue = sigmaMinusString
+//        }
+//
+//        // Button Σ+
+//        let sigmaPlusString = mutableAttributedStringFromString(aString: "Σ+", color: .white)
+//        let sigmaPlusAttributes = [
+//            NSAttributedString.Key.baselineOffset: 1
+//        ]
+//        sigmaPlusString.addAttributes(sigmaPlusAttributes, range: NSMakeRange(1, 1))
+//        buttonCellSigmaPlus.upperText = sigmaPlusString
+//
+//        // Label yx
+//        let TimesNewRoman10Font = NSFont(name: "Times New Roman", size: 10.0)
+//        if let actualFont = TimesNewRoman10Font {
+//            let yxString = mutableAttributedStringFromString(aString: "yx", color: nil)
+//            let yxAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//            yxString.addAttributes(yxAttributes, range: NSMakeRange(1, 1))
+//            labelYX.attributedStringValue = yxString
+//        }
+//
+//        // Button 1/x
+//        if let actualFont = TimesNewRoman10Font {
+//            let oneXString = mutableAttributedStringFromString(aString: "1/x", color: .white)
+//            let oneXAttributes = [
+//                NSAttributedString.Key.font : actualFont,
+//            ]
+//            oneXString.addAttributes(oneXAttributes, range: NSMakeRange(2, 1))
+//            buttonCellOneX.upperText = oneXString
+//        }
+//
+//        // Label x^2
+//        let TimesNewRoman12Font = NSFont(name: "Times New Roman", size: 12.0)
+//        if let actualFont = TimesNewRoman12Font {
+//            let xSquareString = mutableAttributedStringFromString(aString: "x\u{00B2}", color: nil)
+//            let xSquareAttributes = [
+//                NSAttributedString.Key.font : actualFont,
+//            ]
+//            xSquareString.addAttributes(xSquareAttributes, range: NSMakeRange(0, 2))
+//            labelXSquare.attributedStringValue = xSquareString
+//        }
+//
+//        // Button √x
+//        if let actualFont = TimesNewRoman10Font {
+//            let rootXString = mutableAttributedStringFromString(aString: "√x\u{0304}", color: .white)
+//            let rootXAttributes1 = [
+//                NSAttributedString.Key.baselineOffset: 1
+//            ]
+//            rootXString.addAttributes(rootXAttributes1, range: NSMakeRange(2, 1))
+//            let rootXAttributes2 = [
+//                NSAttributedString.Key.font : actualFont,
+//            ]
+//            rootXString.addAttributes(rootXAttributes2, range: NSMakeRange(1, 1))
+//            buttonCellSquareRoot.upperText = rootXString
+//        }
+//
+//        // Label 10^x
+//        if let actualFont = TimesNewRoman10Font {
+//            let tenXString = mutableAttributedStringFromString(aString: "10x", color: nil)
+//            let tenXAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//            tenXString.addAttributes(tenXAttributes, range: NSMakeRange(2, 1))
+//            labelTenX.attributedStringValue = tenXString
+//        }
+//
+//        // Button LOG
+//        buttonCellLog.upperText = mutableAttributedStringFromString(aString: "LOG", color: .white)
+//
+//        // Label e^x
+//        let Helvetica12Font = NSFont(name: "Helvetica", size: 12.0)
+//        if let actualFont = TimesNewRoman10Font {
+//            let eXString = mutableAttributedStringFromString(aString: "ex", color: nil)
+//            let eXAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//
+//            if let actualFont2 = Helvetica12Font {
+//                eXString.addAttributes(eXAttributes, range: NSMakeRange(1, 1))
+//                let eXAttributes2 = [
+//                    NSAttributedString.Key.font : actualFont2
+//                ]
+//                eXString.addAttributes(eXAttributes2, range: NSMakeRange(0, 1))
+//                labelEX.attributedStringValue = eXString
+//            }
+//        }
+//
+//        // Button LN
+//        buttonCellLn.upperText = mutableAttributedStringFromString(aString: "LN", color: .white)
+//
+//        // Label CLΣ
+//        labelCLSigma.attributedStringValue = mutableAttributedStringFromString(aString: "CLΣ", color: nil)
+//
+//        // Button x≷y
+//        let TimesNewRoman14Font = NSFont(name: "Times New Roman", size: 14.0)
+//        if let actualFont = TimesNewRoman14Font {
+//            let XexYString = mutableAttributedStringFromString(aString: "x≷y", color: .white)
+//            let XexYAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 1
+//                ]
+//            XexYString.addAttributes(XexYAttributes, range: NSMakeRange(0, 3))
+//            buttonCellXexY.upperText = XexYString
+//        }
+//
+//        // Label %
+//        labelPercent.attributedStringValue = mutableAttributedStringFromString(aString: "%", color: nil)
+//
+//        // Button R↓
+//        buttonCellRArrrow.upperText = mutableAttributedStringFromString(aString: "R↓", color: .white)
+//
+//        // Label SIN-1
+//        let TimesNewRoman09Font = NSFont(name: "Times New Roman", size: 9.0)
+//        if let actualFont = TimesNewRoman09Font {
+//            let sin1String = mutableAttributedStringFromString(aString: "SIN-1", color: nil)
+//            let sinAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//            sin1String.addAttributes(sinAttributes, range: NSMakeRange(3, 2))
+//            labelSin.attributedStringValue = sin1String
+//        }
+//
+//        // Button SIN
+//        buttonCellSin.upperText = mutableAttributedStringFromString(aString: "SIN", color: .white)
+//
+//        // Label COS-1
+//        if let actualFont = TimesNewRoman09Font {
+//            let cos1String = mutableAttributedStringFromString(aString: "COS-1", color: nil)
+//            let cosAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//            cos1String.addAttributes(cosAttributes, range: NSMakeRange(3, 2))
+//            labelCos.attributedStringValue = cos1String
+//        }
+//
+//        // Button COS
+//        buttonCellCos.upperText = mutableAttributedStringFromString(aString: "COS", color: .white)
+//
+//        // Label TAN-1
+//        if let actualFont = TimesNewRoman09Font {
+//            let tan1String = mutableAttributedStringFromString(aString: "TAN-1", color: nil)
+//            let tanAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 4
+//                ]
+//            tan1String.addAttributes(tanAttributes, range: NSMakeRange(3, 2))
+//            labelTan.attributedStringValue = tan1String
+//        }
+//
+//        // Button TAN
+//        buttonCellTan.upperText = mutableAttributedStringFromString(aString: "TAN", color: .white)
+//
+//        // Label ASN
+//        labelASN.attributedStringValue = mutableAttributedStringFromString(aString: "ASN", color: nil)
+//
+//        // Button XEQ
+//        buttonCellXEQ.upperText = mutableAttributedStringFromString(aString: "XEQ", color: .white)
+//
+//        // Label LBL
+//        labelLBL.attributedStringValue = mutableAttributedStringFromString(aString: "LBL", color: nil)
+//
+//        // Button STO
+//        buttonCellSTO.upperText = mutableAttributedStringFromString(aString: "STO", color: .white)
+//
+//        // Label GTO
+//        labelGTO.attributedStringValue = mutableAttributedStringFromString(aString: "GTO", color: nil)
+//
+//        // Button RCL
+//        buttonCellRCL.upperText = mutableAttributedStringFromString(aString: "RCL", color: .white)
+//
+//        // Label BST
+//        labelBST.attributedStringValue = mutableAttributedStringFromString(aString: "BST", color: nil)
+//
+//        // Button SST
+//        buttonCellSST.upperText = mutableAttributedStringFromString(aString: "SST", color: .white)
+//
+//        // Label CATALOG
+//        labelCATALOG.attributedStringValue = mutableAttributedStringFromString(aString: "CATALOG", color: nil)
+//
+//        // Button ENTER
+//        buttonCellENTER.upperText = mutableAttributedStringFromString(aString: "ENTER ↑", color: .white)
+//
+//        // Label ISG
+//        labelISG.attributedStringValue = mutableAttributedStringFromString(aString: "ISG", color: nil)
+//
+//        // Button CHS
+//        buttonCellCHS.upperText = mutableAttributedStringFromString(aString: "CHS", color: .white)
+//
+//        // Label RTN
+//        labelRTN.attributedStringValue = mutableAttributedStringFromString(aString: "RTN", color: nil)
+//
+//        // Button EEX
+//        buttonCellEEX.upperText = mutableAttributedStringFromString(aString: "EEX", color: .white)
+//
+//        // Label CL X/A
+//        let TimesNewRoman11Font = NSFont(name: "Times New Roman", size: 11.0)
+//        if let actualFont = TimesNewRoman11Font {
+//            let clxaString = mutableAttributedStringFromString(aString: "CL X/A", color: nil)
+//            let clxaAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            clxaString.addAttributes(clxaAttributes, range: NSMakeRange(3, 1))
+//            labelCLXA.attributedStringValue = clxaString
+//        }
+//
+//        // Button Back
+//        let Helvetica11Font = NSFont(name: "Helvetica", size: 11.0)
+//        if let actualFont = Helvetica11Font {
+//            let backString = mutableAttributedStringFromString(aString: "←", color: .white)
+//            let backAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            backString.addAttributes(backAttributes, range: NSMakeRange(0, 1))
+//            buttonCellBack.upperText = backString
+//        }
+//
+//        // Label x=y ?
+//        if let actualFont = TimesNewRoman14Font {
+//            let xeqyString = mutableAttributedStringFromString(aString: "x=y ?", color: nil)
+//            let xeqyAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            xeqyString.addAttributes(xeqyAttributes, range: NSMakeRange(0, 3))
+//            labelXEQY.attributedStringValue = xeqyString
+//        }
+//
+//        // Button Minus
+//        let Helvetica09Font = NSFont(name: "Helvetica", size: 9.0)
+//        if let actualFont = Helvetica09Font {
+//            let minusString = mutableAttributedStringFromString(aString: "━", color: .white)
+//            let minusAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: -1
+//                ]
+//            minusString.addAttributes(minusAttributes, range: NSMakeRange(0, 1))
+//            buttonCellMinus.upperText = minusString
+//        }
+//
+//        // Label x≤y ?
+//        let TimesNewRoman13Font = NSFont(name: "Times New Roman", size: 13.0)
+//        if let actualFont = TimesNewRoman13Font {
+//            let xlessthanyString = mutableAttributedStringFromString(aString: "x≤y ?", color: nil)
+//            let xlessthanyAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            xlessthanyString.addAttributes(xlessthanyAttributes, range: NSMakeRange(0, 3))
+//            labelXLessThanY.attributedStringValue = xlessthanyString
+//        }
+//
+//        // Button Plus
+//        if let actualFont = Helvetica09Font {
+//            let plusString = mutableAttributedStringFromString(aString: "╋", color: .white)
+//            let plusAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            plusString.addAttributes(plusAttributes, range: NSMakeRange(0, 1))
+//            buttonCellPlus.upperText = plusString
+//        }
+//
+//        // Label x≥y ?
+//        if let actualFont = TimesNewRoman13Font {
+//            let xgreaterthanyString = mutableAttributedStringFromString(aString: "x>y ?", color: nil)
+//            let xgreaterthanyAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: -1
+//                ]
+//            xgreaterthanyString.addAttributes(xgreaterthanyAttributes, range: NSMakeRange(0, 3))
+//            labelXGreaterThanY.attributedStringValue = xgreaterthanyString
+//        }
+//
+//        // Button Multiply
+//        let Helvetica15Font = NSFont(name: "Helvetica", size: 15.0)
+//        if let actualFont = Helvetica15Font {
+//            let multiplyString = mutableAttributedStringFromString(aString: "×", color: .white)
+//            let multiplyAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 1
+//                ]
+//            multiplyString.addAttributes(multiplyAttributes, range: NSMakeRange(0, 1))
+//            buttonCellMultiply.upperText = multiplyString
+//        }
+//
+//        // Label x=0 ?
+//        if let actualFont = TimesNewRoman13Font {
+//            let xeq0String = mutableAttributedStringFromString(aString: "x=0 ?", color: nil)
+//            let xeq0Attributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: -1
+//                ]
+//            xeq0String.addAttributes(xeq0Attributes, range: NSMakeRange(0, 5))
+//            labelXEQ0.attributedStringValue = xeq0String
+//        }
+//
+//        // Button Divide
+//        if let actualFont = Helvetica15Font {
+//            let divideString = mutableAttributedStringFromString(aString: "÷", color: .white)
+//            let divideAttributes: [NSAttributedString.Key: Any] = [
+//                .font : actualFont,
+//                .baselineOffset: 1
+//                ]
+//            divideString.addAttributes(divideAttributes, range: NSMakeRange(0, 1))
+//            buttonCellDivide.upperText = divideString
+//        }
+//
+//        // Label SF
+//        labelSF.attributedStringValue = mutableAttributedStringFromString(aString: "SF", color: nil)
+//
+//        // Button 7
+//        if let actualFont = Helvetica13Font {
+//            let sevenString = mutableAttributedStringFromString(aString: "7", color: .white)
+//            let sevenAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            sevenString.addAttributes(sevenAttributes, range: NSMakeRange(0, 1))
+//            buttonCell7.upperText = sevenString
+//        }
+//
+//        // Label CF
+//        labelCF.attributedStringValue = mutableAttributedStringFromString(aString: "CF", color: nil)
+//
+//        // Button 8
+//        if let actualFont = Helvetica13Font {
+//            let eightString = mutableAttributedStringFromString(aString: "8", color: .white)
+//            let eightAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            eightString.addAttributes(eightAttributes, range: NSMakeRange(0, 1))
+//            buttonCell8.upperText = eightString
+//        }
+//
+//        // Label FS?
+//        labelFS.attributedStringValue = mutableAttributedStringFromString(aString: "FS?", color: nil)
+//
+//        // Button 9
+//        if let actualFont = Helvetica13Font {
+//            let nineString = mutableAttributedStringFromString(aString: "9", color: .white)
+//            let nineAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            nineString.addAttributes(nineAttributes, range: NSMakeRange(0, 1))
+//            buttonCell9.upperText = nineString
+//        }
+//
+//        // Label BEEP
+//        labelBEEP.attributedStringValue = mutableAttributedStringFromString(aString: "BEEP", color: nil)
+//
+//        // Button 4
+//        if let actualFont = Helvetica13Font {
+//            let fourString = mutableAttributedStringFromString(aString: "4", color: .white)
+//            let fourAttributes: [NSAttributedString.Key: Any] = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            fourString.addAttributes(fourAttributes, range: NSMakeRange(0, 1))
+//            buttonCell4.upperText = fourString
+//        }
+//
+//        // Label P→R
+//        labelPR.attributedStringValue = mutableAttributedStringFromString(aString: "P→R", color: nil)
+//
+//        // Button 5
+//        if let actualFont = Helvetica13Font {
+//            let fiveString = mutableAttributedStringFromString(aString: "5", color: .white)
+//            let fiveAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            fiveString.addAttributes(fiveAttributes, range: NSMakeRange(0, 1))
+//            buttonCell5.upperText = fiveString
+//        }
+//
+//        // Label R→P
+//        labelRP.attributedStringValue = mutableAttributedStringFromString(aString: "R→P", color: nil)
+//
+//        // Button 6
+//        if let actualFont = Helvetica13Font {
+//            let sixString = mutableAttributedStringFromString(aString: "6", color: .white)
+//            let sixAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            sixString.addAttributes(sixAttributes, range: NSMakeRange(0, 1))
+//            buttonCell6.upperText = sixString
+//        }
+//
+//        // Label FIX
+//        labelFIX.attributedStringValue = mutableAttributedStringFromString(aString: "FIX", color: nil)
+//
+//        // Button 1
+//        if let actualFont = Helvetica13Font {
+//            let oneString = mutableAttributedStringFromString(aString: "1", color: .white)
+//            let oneAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            oneString.addAttributes(oneAttributes, range: NSMakeRange(0, 1))
+//            buttonCell1.upperText = oneString
+//        }
+//
+//        // Label SCI
+//        labelSCI.attributedStringValue = mutableAttributedStringFromString(aString: "SCI", color: nil)
+//
+//        // Button 2
+//        if let actualFont = Helvetica13Font {
+//            let twoString = mutableAttributedStringFromString(aString: "2", color: .white)
+//            let twoAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            twoString.addAttributes(twoAttributes, range: NSMakeRange(0, 1))
+//            buttonCell2.upperText = twoString
+//        }
+//
+//        // Label ENG
+//        labelENG.attributedStringValue = mutableAttributedStringFromString(aString: "ENG", color: nil)
+//
+//        // Button 3
+//        if let actualFont = Helvetica13Font {
+//            let thtreeString = mutableAttributedStringFromString(aString: "3", color: .white)
+//            let thtreeAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            thtreeString.addAttributes(thtreeAttributes, range: NSMakeRange(0, 1))
+//            buttonCell3.upperText = thtreeString
+//        }
+//
+//        // Label PI
+//        let TimesNewRoman15Font = NSFont(name: "Times New Roman", size: 15.0)
+//        if let actualFont = TimesNewRoman15Font {
+//            let piString = mutableAttributedStringFromString(aString: "π", color: nil)
+//            let piAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            piString.addAttributes(piAttributes, range: NSMakeRange(0, 1))
+//            labelPI.attributedStringValue = piString
+//        }
+//
+//        // Button 0
+//        if let actualFont = Helvetica13Font {
+//            let zeroString = mutableAttributedStringFromString(aString: "0", color: .white)
+//            let zeroAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            zeroString.addAttributes(zeroAttributes, range: NSMakeRange(0, 1))
+//            buttonCell0.upperText = zeroString
+//        }
+//
+//        // Label LAST X
+//        if let actualFont = TimesNewRoman13Font {
+//            let lastxString = mutableAttributedStringFromString(aString: "LAST X", color: nil)
+//            let lastxAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            lastxString.addAttributes(lastxAttributes, range: NSMakeRange(5, 1))
+//            labelLASTX.attributedStringValue = lastxString
+//        }
+//
+//        // Button •
+//        if let actualFont = Helvetica13Font {
+//            let pointString = mutableAttributedStringFromString(aString: "•", color: .white)
+//            let pointAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            pointString.addAttributes(pointAttributes, range: NSMakeRange(0, 1))
+//            buttonCellPoint.upperText = pointString
+//        }
+//
+//        // Label VIEW
+//        labelVIEW.attributedStringValue = mutableAttributedStringFromString(aString: "VIEW", color: nil)
+//
+//        // Button R/S
+//        if let actualFont = Helvetica12Font {
+//            let rsString = mutableAttributedStringFromString(aString: "R/S", color: .white)
+//            let rsAttributes = [
+//                NSAttributedString.Key.font : actualFont
+//            ]
+//            rsString.addAttributes(rsAttributes, range: NSMakeRange(0, 3))
+//            buttonCellRS.upperText = rsString
+//        }
 	}
 	
 	override func viewDidAppear() {
+        super.viewDidAppear()
+
 		if let cType = CalculatorController.sharedInstance.calculatorType {
 			switch cType {
 			case CalculatorType.hp41C:
@@ -668,12 +666,6 @@ final class ViewController: NSViewController {
 		}
 	}
 
-	override var representedObject: Any? {
-		didSet {
-		// Update the view, if already loaded.
-		}
-	}
-	
 	func mutableAttributedStringFromString(aString: String, color: NSColor?) -> NSMutableAttributedString {
 		let Helvetica11Font = NSFont(name: "Helvetica", size: 11.0)
 		if let actualFont = Helvetica11Font {
@@ -712,7 +704,8 @@ final class ViewController: NSViewController {
 	}
 }
 
-class KeyboardView : NSView {
+final class KeyboardView : NSView {
+
 	override func draw(_ dirtyRect: NSRect) {
 		//// Color Declarations
 		let color = NSColor(calibratedRed: 0.604, green: 0.467, blue: 0.337, alpha: 1)
@@ -728,32 +721,25 @@ class KeyboardView : NSView {
 		bezierPath.lineWidth = 2
 		bezierPath.stroke()
 	}
+
 }
 
-class CalculatorView: NSView {
+final class CalculatorView: NSView {
 	@IBOutlet weak var lcdDisplay: Display!
 	
 	var viewController: ViewController?
 	var pressedKey: Key?
 	
 	override func awakeFromNib() {
+        super.awakeFromNib()
+
 		var rect = bounds
 		rect.origin.x = 0.0
 		rect.origin.y = 0.0
 		setNeedsDisplay(rect)
 		
-		NotificationCenter.default.addObserver(
-			self,
-            selector: #selector(displayOff),
-			name: NSNotification.Name(rawValue: "displayOff"),
-			object: nil
-		)
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(displayToggle),
-			name: NSNotification.Name(rawValue: "displayToggle"),
-			object: nil
-		)
+		NotificationCenter.default.addObserver(self, selector: #selector(displayOff), name: .displayOff, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(displayToggle), name: .displayToggle, object: nil)
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }

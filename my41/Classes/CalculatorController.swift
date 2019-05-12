@@ -15,13 +15,10 @@ class CalculatorController : Calculator {
 	override init() {		
 		super.init()
 		
-		NotificationCenter.default.addObserver(
-			forName: NSApplication.willBecomeActiveNotification,
-			object: nil,
-			queue: nil) { active in
-				if let tModule = self.timerModule {
-					tModule.synchronyzeWithComputer()
-				}
-		}
-	}
+        NotificationCenter.default.addObserver(forName: NSApplication.willBecomeActiveNotification, object: nil, queue: nil) { (_) in
+            if let tModule = self.timerModule {
+                tModule.synchronyzeWithComputer()
+            }
+        }
+    }
 }
