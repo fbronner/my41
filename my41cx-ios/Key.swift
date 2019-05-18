@@ -12,7 +12,7 @@ class Key: UIButton {
 	@IBOutlet weak var keygroup: KeyGroup!
 
 	@objc var lowerText: String?
-	@objc var upperText: NSMutableAttributedString?
+	@objc var upperText: NSAttributedString?
 	@objc var shiftButton: String?
 	var switchButton: String?
 

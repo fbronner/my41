@@ -116,10 +116,6 @@ final class Display : NSView, Peripheral {
 	override func awakeFromNib() {
         super.awakeFromNib()
 
-//        wantsLayer = true
-//        let image = NSImage(named: "hp41")
-//        layer?.contents = image
-
         calculatorController.display = self
 		foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
 		displayFont = loadFont("hpfont")
@@ -148,10 +144,10 @@ final class Display : NSView, Peripheral {
 		// 0x40..0x4f: a-e + "hangman"
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
-		let filename: String = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
-		let mString: NSMutableString = try! NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue)
+		let filename = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
+		let mString = try! NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue)
 		CTULookup = String(mString)
-		CTULookupLength = (CTULookup!).count
+		CTULookupLength = CTULookup!.count
 	}
 
 	override var isFlipped:Bool{

@@ -58,11 +58,11 @@ final class Key: NSButton {
     }
 }
 
-final class ButtonCell: NSButtonCell {
-    var lowerText: String?
+@IBDesignable final class ButtonCell: NSButtonCell {
+    @IBInspectable var lowerText: String?
     var upperText: NSMutableAttributedString?
-    var shiftButton: String?
-    var switchButton: String?
+    @IBInspectable var shiftButton: String?
+    @IBInspectable var switchButton: String?
 
     override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
         let ctx = NSGraphicsContext.current!
@@ -157,7 +157,7 @@ final class ButtonCell: NSButtonCell {
             } else {
                 lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
             }
-            let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+            let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             textStyle.alignment = .center
 
             var font: NSFont

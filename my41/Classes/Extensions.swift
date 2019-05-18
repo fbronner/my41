@@ -11,7 +11,7 @@ import Foundation
 extension String {
 
     subscript(integerIndex: Int) -> Character {
-        return self[self.index(startIndex, offsetBy: integerIndex)]
+        return self[index(startIndex, offsetBy: integerIndex)]
     }
 
     func pad(with string: String = "0", toSize: Int) -> String {
