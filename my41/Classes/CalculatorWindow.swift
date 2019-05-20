@@ -112,11 +112,10 @@ final class Display : NSView, Peripheral {
 	var displayFont = DisplayFont()
 	var segmentPaths = DisplaySegmentPaths()
 	var annunciatorFont: NSFont?
-	var annunciatorFontScale: CGFloat = 1.2
-	var annunciatorFontSize: CGFloat = 9.0
+	var annunciatorFontSize: CGFloat = 10.0
 	var annunciatorBottomMargin: CGFloat = 4.0
 	var annunciatorPositions: [NSPoint] = [NSPoint](repeating: NSMakePoint(0.0, 0.0), count: 12)
-	var foregroundColor: NSColor?
+	var foregroundColor = NSColor.black
  
     private var _contrast: Digit = 0
 	var contrast: Digit {
@@ -135,11 +134,9 @@ final class Display : NSView, Peripheral {
         super.awakeFromNib()
 
         calculatorController.display = self
-		foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
 		displayFont = loadFont("hpfont")
-//		segmentPaths = loadSegmentPaths("hpchar")
 		segmentPaths = bezierPaths()
-		annunciatorFont = NSFont(name: "Menlo", size:annunciatorFontScale * annunciatorFontSize)
+		annunciatorFont = NSFont(name: "Menlo", size: annunciatorFontSize)
 		annunciatorPositions = calculateAnnunciatorPositions(font: annunciatorFont!, inRect: bounds)
 		on = true
 		updateCountdown = 2
@@ -173,55 +170,33 @@ final class Display : NSView, Peripheral {
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {
-		if on {
-			let cellTranslation = NSAffineTransform()
-			cellTranslation.translateX(by: cellWidth(), yBy: 0.0)
-			foregroundColor?.set()
-			if true {
-				NSGraphicsContext.saveGraphicsState()
-				for idx in 0..<numDisplayCells {
-					let segmentsOn = segmentsForCell(idx)
-					for seg in 0..<numDisplaySegments {
-						if (segmentsOn & (1 << UInt32(seg))) != 0 {
-							segmentPaths[seg].fill()
-						}
-					}
-					cellTranslation.concat()
-				}
-				NSGraphicsContext.restoreGraphicsState()
-			}
-			
-			lockFocus()
-			let attrs = [
-                NSAttributedString.Key.font: annunciatorFont!
-			]
-			calculatorController.prgmMode = false
-			calculatorController.alphaMode = false
-			for idx in 0..<numAnnunciators {
-				if annunciatorOn(idx) {
-					if idx == 10 {
-						calculatorController.prgmMode = true
-					}
-					if idx == 11 {
-						calculatorController.alphaMode = true
-					}
-					
-					let transformation = NSAffineTransform()
-					let point = annunciatorPositions[idx]
-					transformation.translateX(by: point.x, yBy: point.y)
-					transformation.scale(by: 1.0 / annunciatorFontScale)
-					NSGraphicsContext.saveGraphicsState()
-					transformation.concat()
-					let nsString = annunciatorStrings[idx] as NSString
-					nsString.draw(
-						at: NSMakePoint(0.0, 0.0),
-						withAttributes: attrs
-					)
-					NSGraphicsContext.restoreGraphicsState()
-				}
-			}
-			unlockFocus()
-		}
+        guard on else {
+            return
+        }
+
+        NSGraphicsContext.saveGraphicsState()
+        let cellTranslation = NSAffineTransform()
+        cellTranslation.translateX(by: cellWidth(), yBy: 0.0)
+        foregroundColor.set()
+        for idx in 0..<numDisplayCells {
+            let segmentsOn = segmentsForCell(idx)
+            for seg in 0..<numDisplaySegments where (segmentsOn & (1 << UInt32(seg))) != 0 {
+                segmentPaths[seg].fill()
+            }
+            cellTranslation.concat()
+        }
+        NSGraphicsContext.restoreGraphicsState()
+
+        let attrs: [NSAttributedString.Key: Any] = [
+            .font: annunciatorFont!,
+            .foregroundColor: foregroundColor
+        ]
+        calculatorController.prgmMode = annunciatorOn(10)
+        calculatorController.alphaMode = annunciatorOn(11)
+        for idx in 0..<numAnnunciators where annunciatorOn(idx) {
+            let nsString = annunciatorStrings[idx] as NSString
+            nsString.draw(at: annunciatorPositions[idx], withAttributes: attrs)
+        }
 	}
 	
 	func bezierPaths() -> DisplaySegmentPaths
@@ -714,7 +689,7 @@ final class Display : NSView, Peripheral {
 		d -= font.descender
 		
 		h = NSLayoutManager().defaultLineHeight(for: font)
-		y = bounds.size.height - annunciatorBottomMargin - (h - d) / annunciatorFontScale
+		y = bounds.size.height - annunciatorBottomMargin - (h - d)
 		
 		for idx in 0..<numAnnunciators {
 			positions[idx] = NSMakePoint(x, y)

@@ -255,7 +255,7 @@ class ModDetailsView: NSView {
 	var hardware: String?
 	
 	override func draw(_ dirtyRect: NSRect) {
-		let backColor = NSColor(named: "backgroundLight") ?? NSColor.darkGray
+		let backColor = NSColor.darkGray
 		let rect = NSMakeRect(bounds.origin.x + 3, bounds.origin.y + 3, bounds.size.width - 6, bounds.size.height - 6)
 		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
