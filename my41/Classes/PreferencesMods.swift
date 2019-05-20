@@ -145,7 +145,9 @@ class PreferencesModsViewController: NSViewController {
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
 			let filePath = modFile 
-			if (filePath as NSString).lastPathComponent != "nut-c.mod" && (filePath as NSString).lastPathComponent != "nut-cv.mod" && (filePath as NSString).lastPathComponent != "nut-cx.mod" {
+			if (filePath as NSString).lastPathComponent != "nut-c.mod" &&
+                (filePath as NSString).lastPathComponent != "nut-cv.mod" &&
+                (filePath as NSString).lastPathComponent != "nut-cx.mod" {
 				realModFiles.append(modFile )
 			}
 		}

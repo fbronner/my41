@@ -31,6 +31,12 @@ final class CalculatorWindow : NSWindow {
 		backgroundColor = NSColor.clear
 		isOpaque = false
 		hasShadow = true
+
+        NotificationCenter.default.addObserver(forName: .calculatorTypeChanged, object: nil, queue: nil) { (_) in
+            self.calculatorChanged()
+        }
+
+        calculatorChanged()
 	}
 	
 	override var canBecomeMain: Bool {
@@ -80,6 +86,18 @@ final class CalculatorWindow : NSWindow {
 	override func mouseUp(with theEvent: NSEvent) {
 		initialLocation = nil
 	}
+
+    private func calculatorChanged() {
+        switch CalculatorType.getDefault() {
+        case .hp41C:
+            title = "my41C"
+        case .hp41CV:
+            title = "my41CV"
+        case .hp41CX:
+            title = "my41CX"
+        }
+    }
+
 }
 
 final class Display : NSView, Peripheral {

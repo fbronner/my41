@@ -67,11 +67,13 @@ final class PreferencesContainerViewController: NSViewController {
     func applyChanges() {
         // First check calclulator type
         var needsRestart = false
+        var restoringMemory = true
 
         let currentCalculatorType = preferencesCalculatorViewController?.calculatorType
         if CalculatorType.getDefault() != currentCalculatorType {
-            currentCalculatorType?.setDefault()
+            restoringMemory = false
             needsRestart = true
+            currentCalculatorType?.setDefault()
         }
 
         if let path = preferencesModsViewController?.expansionModule1.filePath {
@@ -88,32 +90,19 @@ final class PreferencesContainerViewController: NSViewController {
         }
 
         if needsRestart {
-            CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
+            NotificationCenter.default.post(name: .calculatorTypeChanged, object: nil)
+            CalculatorController.sharedInstance.resetCalculator(restoringMemory: restoringMemory)
         }
     }
 
     private func applyPortChange(key: String, path: String) -> Bool {
-        if let fPath = preferencesModsViewController?.expansionModule1.filePath {
-            // We have something in a port
-            let moduleName = (fPath as NSString).lastPathComponent
-            if let dModuleName = UserDefaults.standard.string(forKey: key) {
-                // And we had something in Port1 at the begining
-                if moduleName != dModuleName {
-                    // This is different module
-                    UserDefaults.standard.set((fPath as NSString).lastPathComponent, forKey: key)
-                    return true
-                }
-            } else {
-                // Port1 was empty
-                UserDefaults.standard.set((fPath as NSString).lastPathComponent, forKey: key)
-                return true
-            }
-        } else {
-            // Port1 is empty now
-            if UserDefaults.standard.string(forKey: key) != nil {
-                // But we had something in Port1
-                UserDefaults.standard.removeObject(forKey: key)
-            }
+        // We have something in a port
+        let newModule = (path as NSString).lastPathComponent
+        let oldModule = UserDefaults.standard.string(forKey: key)
+        if oldModule == nil || newModule != oldModule {
+            // This is different module
+            UserDefaults.standard.set(newModule, forKey: key)
+            return true
         }
 
         return false
@@ -190,7 +179,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 600
+                constant: 540
             )
         )
         view.addConstraint(
@@ -212,7 +201,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 600
+                constant: 540
             )
         )
     }
@@ -228,11 +217,8 @@ final class PreferencesSegue: NSStoryboardSegue {
         let source = sourceController as! NSViewController
         let destination = destinationController as! NSViewController
 
-        if source.view.subviews.count > 0 {
-            let aView: AnyObject = source.view.subviews[0]
-            if aView is NSView {
-                aView.removeFromSuperview()
-            }
+        if let first = source.view.subviews.first {
+            first.removeFromSuperview()
         }
 
         let views = ["dView": destination.view]

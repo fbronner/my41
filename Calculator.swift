@@ -14,6 +14,10 @@ enum CalculatorType {
 	case hp41CX
 }
 
+extension Notification.Name {
+    static let calculatorTypeChanged = Notification.Name(rawValue: "calculatorTypeChanged")
+}
+
 extension CalculatorType {
     init(_ int: Int) {
         switch int {
@@ -99,9 +103,10 @@ class Calculator {
 		cpu.reset()
 
 		bus.removeAllRomChips()
+        portMod = [nil, nil, nil, nil]
 		
+        readCalculatorDescriptionFromDefaults()
 		installBuiltinRoms()
-		
 		installExternalModules()
 		emptyRAM()
 
@@ -121,8 +126,6 @@ class Calculator {
 	}
 	
 	func installBuiltinRoms() {
-		readCalculatorDescriptionFromDefaults()
-		
 		let debugSupportRom = RomChip()
 		debugSupportRom.writable = true
 		debugSupportRom[0] = 0x3E0
