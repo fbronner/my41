@@ -195,7 +195,7 @@ class PreferencesModsViewController: NSViewController {
 		reloadModFiles()
 	}
 	
-	@IBAction func applyChanges(sender: AnyObject) {
+	@IBAction func applyChanges(_ button: NSButton) {
 		preferencesContainerViewController?.applyChanges()
 	}
 	

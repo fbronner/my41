@@ -614,15 +614,13 @@ final class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        if let cType = CalculatorController.sharedInstance.calculatorType {
-            switch cType {
-            case CalculatorType.hp41C:
-                calculatorLabel.stringValue = "my41C"
-            case CalculatorType.hp41CV:
-                calculatorLabel.stringValue = "my41CV"
-            case CalculatorType.hp41CX:
-                calculatorLabel.stringValue = "my41CX"
-            }
+        switch CalculatorType.getDefault() {
+        case CalculatorType.hp41C:
+            calculatorLabel.stringValue = "my41C"
+        case CalculatorType.hp41CV:
+            calculatorLabel.stringValue = "my41CV"
+        case CalculatorType.hp41CX:
+            calculatorLabel.stringValue = "my41CX"
         }
     }
 

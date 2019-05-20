@@ -17,35 +17,19 @@ final class PreferencesCalculatorViewController: NSViewController, NSComboBoxDel
 	@IBOutlet weak var cardReaderButton: NSButton!
 	@IBOutlet weak var synchronyzeButton: NSButton!
 
-	var calculatorType: CalculatorType?
+    var calculatorType = CalculatorType.getDefault()
 	var preferencesContainerViewController: PreferencesContainerViewController?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-		let defaults = UserDefaults.standard
-		
-		let cType = defaults.integer(forKey: HPCalculatorType)
-		
-		switch cType {
-		case 1:
-			calculatorType = .hp41C
-		case 2:
-			calculatorType = .hp41CV
-		case 3:
-			calculatorType = .hp41CX
-		default:
-			// Make sure I have a default for next time
-			calculatorType = .hp41CX
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
-		}
-		calculatorSelector.selectItem(at: cType - 1)
+		calculatorSelector.selectItem(at: calculatorType.asIndex())
 	}
 	
 	
 	//MARK: - Actions
 	
-	@IBAction func applyChanges(sender: AnyObject)
+    @IBAction func applyChanges(_ button: NSButton)
 	{
 		preferencesContainerViewController?.applyChanges()
 	}
@@ -54,9 +38,7 @@ final class PreferencesCalculatorViewController: NSViewController, NSComboBoxDel
 	{
 		if sender as? NSObject == synchronyzeButton {
             SYNCHRONYZE = synchronyzeButton.state == NSControl.StateValue.on
-			let defaults = UserDefaults.standard
-			defaults.set(SYNCHRONYZE, forKey: "synchronyzeTime")
-			defaults.synchronize()
+			UserDefaults.standard.set(SYNCHRONYZE, forKey: "synchronyzeTime")
 		}
 	}
 
@@ -65,24 +47,7 @@ final class PreferencesCalculatorViewController: NSViewController, NSComboBoxDel
 	func comboBoxSelectionDidChange(_ notification: Notification)
 	{
 		if notification.object as? NSObject == calculatorSelector {
-			let selected = calculatorSelector.indexOfSelectedItem + 1
-			let defaults = UserDefaults.standard
-			let cType = defaults.integer(forKey: HPCalculatorType)
-			
-			if selected != cType {
-//				comments.stringValue = "Please be aware that changing the calculator type may result in some memory loss"
-				switch selected {
-				case 1:
-					calculatorType = .hp41C
-				case 2:
-					calculatorType = .hp41CV
-				case 3:
-					calculatorType = .hp41CX
-				default:
-					// Make sure I have a default for next time
-					calculatorType = .hp41CX
-				}
-			}
+            calculatorType = CalculatorType(index: calculatorSelector.indexOfSelectedItem)
 		}
 	}
     

@@ -8,10 +8,56 @@
 
 import Foundation
 
-enum CalculatorType: Int {
-	case hp41C  = 1
-	case hp41CV = 2
-	case hp41CX = 3
+enum CalculatorType {
+	case hp41C
+	case hp41CV
+	case hp41CX
+}
+
+extension CalculatorType {
+    init(_ int: Int) {
+        switch int {
+        case 1:
+            self = .hp41C
+        case 2:
+            self = .hp41CV
+        default:
+            self = .hp41CX
+        }
+    }
+
+    init(index: Int) {
+        self.init(index + 1)
+    }
+
+    func asInt() -> Int {
+        switch self {
+        case .hp41C:
+            return 1
+        case .hp41CV:
+            return 2
+        case .hp41CX:
+            return 3
+        }
+    }
+
+    func asIndex() -> Int {
+        return asInt() - 1
+    }
+
+    func setDefault() {
+        UserDefaults.standard.set(asInt(), forKey: "CalculatorType")
+    }
+
+    static func getDefault() -> CalculatorType {
+        let value = UserDefaults.standard.integer(forKey: "CalculatorType")
+        if value == 0 {
+            return .hp41CX
+        }
+
+        return CalculatorType(value)
+    }
+
 }
 
 let MAX_RAM_SIZE		= 0x400
@@ -22,7 +68,6 @@ let HPPort2 = "ModulePort2"
 let HPPort3 = "ModulePort3"
 let HPPort4 = "ModulePort4"
 
-let HPCalculatorType = "CalculatorType"
 let HPPrinterAvailable = "PrinterAvailable"
 let HPCardReaderAvailable = "CardReaderAvailable"
 let HPDisplayDebug = "DisplayDebug"
@@ -33,7 +78,6 @@ let HPResetCalculator = "ResetCalculator"
 class Calculator {
 	var calculatorMod = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
-	var calculatorType: CalculatorType?
 	var executionTimer: Foundation.Timer?
 	var timerModule: Timer?
 	var display: Display?
@@ -229,52 +273,41 @@ class Calculator {
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {
-		let defaults = UserDefaults.standard
-		let cType = defaults.integer(forKey: HPCalculatorType)
-		readROMModule(cType)
+		readROMModule()
 		
 		// Now we fill each port
+        let defaults = UserDefaults.standard
 		do {
-			if defaults.string(forKey: HPPort1) != nil {
+			if let port1 = defaults.string(forKey: HPPort1) {
 				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
+				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + port1)
 			}
-			if defaults.string(forKey: HPPort2) != nil {
+			if let port2 = defaults.string(forKey: HPPort2) {
 				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
+				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + port2)
 			}
-			if defaults.string(forKey: HPPort3) != nil {
+			if let port3 = defaults.string(forKey: HPPort3) {
 				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
+				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + port3)
 			}
-			if defaults.string(forKey: HPPort4) != nil {
+			if let port4 = defaults.string(forKey: HPPort4) {
 				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
+				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + port4)
 			}
 		} catch _ {
 			
 		}
 	}
 	
-	func readROMModule(_ cType: Int) {
-		var filename: String
-		switch cType {
-		case 1:
-			calculatorType = .hp41C
+    func readROMModule() {
+        var filename: String
+		switch CalculatorType.getDefault() {
+		case .hp41C:
 			filename = Bundle.main.resourcePath! + "/" + "nut-c.mod"
-		case 2:
-			calculatorType = .hp41CV
+		case .hp41CV:
 			filename = Bundle.main.resourcePath! + "/" + "nut-cv.mod"
-		case 3:
-			calculatorType = .hp41CX
+		case .hp41CX:
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
-		default:
-			// Make sure I have a default for next time
-			calculatorType = .hp41CX
-			let defaults = UserDefaults.standard
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
-			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
-			defaults.synchronize()
 		}
 		
 		do {

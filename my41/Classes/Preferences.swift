@@ -68,10 +68,9 @@ final class PreferencesContainerViewController: NSViewController {
         // First check calclulator type
         var needsRestart = false
 
-        let cType = UserDefaults.standard.integer(forKey: HPCalculatorType)
-        let currentCalculatorType = preferencesCalculatorViewController?.calculatorType?.rawValue
-        if cType != currentCalculatorType {
-            UserDefaults.standard.set(currentCalculatorType!, forKey: HPCalculatorType)
+        let currentCalculatorType = preferencesCalculatorViewController?.calculatorType
+        if CalculatorType.getDefault() != currentCalculatorType {
+            currentCalculatorType?.setDefault()
             needsRestart = true
         }
 
@@ -180,7 +179,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 194
+                constant: 200
             )
         )
         view.addConstraint(
@@ -191,7 +190,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 587
+                constant: 600
             )
         )
         view.addConstraint(
@@ -202,7 +201,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 528
+                constant: 600
             )
         )
         view.addConstraint(
@@ -213,7 +212,7 @@ final class PreferencesSplitViewController: NSSplitViewController {
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 0,
-                constant: 587
+                constant: 600
             )
         )
     }
@@ -236,14 +235,14 @@ final class PreferencesSegue: NSStoryboardSegue {
             }
         }
 
-        let dView = destination.view
-        source.view.addSubview(dView)
+        let views = ["dView": destination.view]
+        source.view.addSubview(destination.view)
         source.view.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "H:|[dView]|",
                 options: [],
                 metrics: nil,
-                views: ["dView": dView]
+                views: views
             )
         )
         source.view.addConstraints(
@@ -251,7 +250,7 @@ final class PreferencesSegue: NSStoryboardSegue {
                 withVisualFormat: "V:|[dView]|",
                 options: [],
                 metrics: nil,
-                views: ["dView": dView]
+                views: views
             )
         )
     }

@@ -10,28 +10,22 @@ import Foundation
 import Cocoa
 
 class PreferencesMenuViewController: NSViewController {
+    @IBOutlet private weak var calculatorButton: NSButton!
+    @IBOutlet private weak var modsButton: NSButton!
 	var calculatorView: SelectedPreferencesView?
 	var modsView: SelectedPreferencesView?
 	
 	var preferencesContainerViewController: PreferencesContainerViewController?
 	
 	@IBOutlet weak var menuView: NSView!
-	
 
-	override func viewDidLayout() {
-        super.viewDidLayout()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
 		if calculatorView != nil {
 			calculatorView?.removeFromSuperview()
 		}
-		calculatorView = SelectedPreferencesView(
-			frame: CGRect(
-				x: 0.0,
-				y: menuView.frame.height - 38.0,
-				width: 184.0,
-				height: 24.0
-			)
-		)
+		calculatorView = SelectedPreferencesView(frame: calculatorButton.frame)
 		calculatorView?.text = "Calculator"
 		calculatorView?.selected = true
 		menuView.addSubview(calculatorView!)
@@ -39,14 +33,7 @@ class PreferencesMenuViewController: NSViewController {
 		if modsView != nil {
 			modsView?.removeFromSuperview()
 		}
-		modsView = SelectedPreferencesView(
-			frame: CGRect(
-				x: 0.0,
-				y: menuView.frame.height - 65.0,
-				width: 184.0,
-				height: 24.0
-			)
-		)
+        modsView = SelectedPreferencesView(frame: modsButton.frame)
 		modsView?.text = "MODs"
 		modsView?.selected = false
 		menuView.addSubview(modsView!)

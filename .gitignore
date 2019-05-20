@@ -1,2 +1,5 @@
 DerivedData/
 Certificates/
+*.xcbkptlist
+*.xcsettings
+*.xcuserstate
