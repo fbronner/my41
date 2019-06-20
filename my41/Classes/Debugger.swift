@@ -1,5 +1,5 @@
 //
-//  Debuger.swift
+//  Debugger.swift
 //  my41
 //
 //  Created by Miroslav Perovic on 9/21/14.

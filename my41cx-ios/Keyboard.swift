@@ -51,11 +51,11 @@ class KeyGroup: UIView {
 	}
 	
 	func key(_ key: Key, pressed: Bool) {
-		keyboard.keyWithCode(Bits8(truncating: key.keyCode!), pressed: pressed)
+		keyboard.keyWithCode(key.keyCode!, pressed: pressed)
 		
 		if pressed && SOUND {
 			DispatchQueue.global(qos: .utility).async {
-				AudioServicesPlaySystemSound(mySound)
+                AudioServicesPlaySystemSound(self.mySound)
 			}
 		}
 	}

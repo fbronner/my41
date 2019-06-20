@@ -1,5 +1,5 @@
 //
-//  DebugerMenu.swift
+//  DebuggerMenu.swift
 //  my41
 //
 //  Created by Miroslav Perovic on 11/15/14.

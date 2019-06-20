@@ -24,8 +24,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-		let defaults = UserDefaults.standard
-		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
+		calculator.selectedSegmentIndex = CalculatorType.getDefault().asIndex()
 
 		sound.isOn = SOUND
 		yRatio = view.bounds.size.height / 800.0
@@ -51,7 +50,8 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	
 	@IBAction func applyChanges(_ sender: AnyObject) {
 		var needsRestart = false
-		
+        var restoringMemory = true
+
 		let defaults = UserDefaults.standard
 		
 		// Sound settings
@@ -70,116 +70,47 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		}
 		defaults.set(SYNCHRONYZE, forKey: "synchronyzeTime")
 
-		// Calculator type
-		let calculatorType = defaults.integer(forKey: HPCalculatorType)
-		let currentCalculatorType = calculator.selectedSegmentIndex + 1
-		if calculatorType != currentCalculatorType {
-			defaults.set(currentCalculatorType, forKey: HPCalculatorType)
-			needsRestart = true
-		}
-		
+        // Calculator type
+        let currentCalculatorType = calculator.selectedSegmentIndex
+        if CalculatorType.getDefault().asIndex() != currentCalculatorType {
+            restoringMemory = false
+            needsRestart = true
+            CalculatorType(index: currentCalculatorType).setDefault()
+        }
+
 		// Modules
-		if let fPath = expansionModule1?.filePath {
-			// We have something in Port1
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort1) {
-				// And we had something in Port1 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort1)
-					needsRestart = true
-				}
-			} else {
-				// Port1 was empty
-				defaults.set(moduleName, forKey: HPPort1)
-				needsRestart = true
-			}
-		} else {
-			// Port1 is empty now
-			if let _ = defaults.string(forKey: HPPort1) {
-				// But we had something in Port1
-				defaults.removeObject(forKey: HPPort1)
-			}
-		}
+        if let path = expansionModule1?.filePath {
+            needsRestart = needsRestart || applyPortChange(key: HPPort1, path: path)
+        }
+        if let path = expansionModule2?.filePath {
+            needsRestart = needsRestart || applyPortChange(key: HPPort2, path: path)
+        }
+        if let path = expansionModule3?.filePath {
+            needsRestart = needsRestart || applyPortChange(key: HPPort3, path: path)
+        }
+        if let path = expansionModule4?.filePath {
+            needsRestart = needsRestart || applyPortChange(key: HPPort4, path: path)
+        }
 
-		if let fPath = expansionModule2?.filePath {
-			// We have something in Port2
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort2) {
-				// And we had something in Port2 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort2)
-					needsRestart = true
-				}
-			} else {
-				// Port2 was empty
-				defaults.set(moduleName, forKey: HPPort2)
-				needsRestart = true
-			}
-		} else {
-			// Port2 is empty now
-			if let _ = defaults.string(forKey: HPPort2) {
-				// But we had something in Port2
-				defaults.removeObject(forKey: HPPort2)
-			}
-		}
-
-		if let fPath = expansionModule3?.filePath {
-			// We have something in Port3
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort3) {
-				// And we had something in Port3 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort3)
-					needsRestart = true
-				}
-			} else {
-				// Port3 was empty
-				defaults.set(moduleName, forKey: HPPort3)
-				needsRestart = true
-			}
-		} else {
-			// Port3 is empty now
-			if let _ = defaults.string(forKey: HPPort3) {
-				// But we had something in Port3
-				defaults.removeObject(forKey: HPPort3)
-			}
-		}
-
-		if let fPath = expansionModule4?.filePath {
-			// We have something in Port4
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort4) {
-				// And we had something in Port4 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort4)
-					needsRestart = true
-				}
-			} else {
-				// Port4 was empty
-				defaults.set(moduleName, forKey: HPPort4)
-				needsRestart = true
-			}
-		} else {
-			// Port4 is empty now
-			if let _ = defaults.string(forKey: HPPort4) {
-				// But we had something in Port4
-				defaults.removeObject(forKey: HPPort4)
-			}
-		}
-		defaults.synchronize()
-
-		dismiss(
-			animated: true,
-			completion: nil)
-		
-		if needsRestart {
-			CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
-		}
+        if needsRestart {
+            NotificationCenter.default.post(name: .calculatorTypeChanged, object: nil)
+            CalculatorController.sharedInstance.resetCalculator(restoringMemory: restoringMemory)
+        }
 	}
+
+    private func applyPortChange(key: String, path: String) -> Bool {
+        // We have something in a port
+        let newModule = (path as NSString).lastPathComponent
+        let oldModule = UserDefaults.standard.string(forKey: key)
+        if oldModule == nil || newModule != oldModule {
+            // This is different module
+            UserDefaults.standard.set(newModule, forKey: key)
+            return true
+        }
+
+        return false
+    }
+
 }
 
 class MODsView: UIView, UIAlertViewDelegate {
@@ -251,19 +182,19 @@ class MODsView: UIView, UIAlertViewDelegate {
 			)
 
 			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-				if let oldFilePath = oldFilePath {
-					filePath = oldFilePath
-					oldFilePath = nil
+                if let oldFilePath = self.oldFilePath {
+                    self.filePath = oldFilePath
+					self.oldFilePath = nil
 				}
 			}
 			let emptyAction = UIAlertAction(title: "Empty port", style: .default) { (result : UIAlertAction) -> Void in
-				filePath = nil
-				setNeedsDisplay()
+                self.filePath = nil
+				self.setNeedsDisplay()
 			}
 			let replaceAction = UIAlertAction(title: "Replace module", style: .default) { (result : UIAlertAction) -> Void in
-				oldFilePath = filePath
-				filePath = nil
-				selectModule()
+                self.oldFilePath = self.filePath
+				self.filePath = nil
+				self.selectModule()
 			}
 			alertController.addAction(cancelAction)
 			alertController.addAction(emptyAction)
@@ -284,16 +215,16 @@ class MODsView: UIView, UIAlertViewDelegate {
 		reloadModFiles()
 		for (_, element) in modFiles.enumerated() {
 			let modAction = UIAlertAction(title: (element as NSString).lastPathComponent, style: .default) { (result : UIAlertAction) -> Void in
-				filePath = element
-				oldFilePath = nil
-				setNeedsDisplay()
+				self.filePath = element
+				self.oldFilePath = nil
+				self.setNeedsDisplay()
 			}
 			alertController.addAction(modAction)
 		}
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-			if let oldFilePath = oldFilePath {
-				filePath = oldFilePath
-				oldFilePath = nil
+			if let oldFilePath = self.oldFilePath {
+				self.filePath = oldFilePath
+				self.oldFilePath = nil
 			}
 		}
 		alertController.addAction(cancelAction)

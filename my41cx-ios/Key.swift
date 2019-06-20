@@ -11,12 +11,12 @@ import UIKit
 class Key: UIButton {
 	@IBOutlet weak var keygroup: KeyGroup!
 
-	@objc var lowerText: String?
-	@objc var upperText: NSAttributedString?
-	@objc var shiftButton: String?
+	var lowerText: String?
+	var upperText: NSAttributedString?
+	var shiftButton: String?
 	var switchButton: String?
 
-	@objc var keyCode: Bits8?
+	var keyCode: Bits8?
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0

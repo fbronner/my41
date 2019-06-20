@@ -21,7 +21,7 @@
 		DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
 		DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8D19B3A09B0091E143 /* hpchar.geom */; };
 		DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */; };
-		DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */; };
+		DC4E040D1A1774F1008D6DD5 /* DebuggerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebuggerMenu.swift */; };
 		DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */; };
 		DC56269D198B75E80040453F /* XNUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56268F198B75E80040453F /* XNUT2.ROM */; };
 		DC56269E198B75E80040453F /* XNUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562690198B75E80040453F /* XNUT1.ROM */; };
@@ -49,7 +49,7 @@
 		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
 		DC705C881A951B16009C98D3 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC705C871A951B16009C98D3 /* hpchar.geom */; };
 		DC705C891A952F7C009C98D3 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
-		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
+		DC74922719CF1E600012B5C0 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debugger.swift */; };
 		DC75043919B2652200180161 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC799D881A155CA2002FACBE /* my41.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC799D871A155CA2002FACBE /* my41.icns */; };
 		DC7B24A21A79141E0080F85A /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
@@ -393,7 +393,7 @@
 		DC46ED8C19B3A09B0091E143 /* display.lookup */ = {isa = PBXFileReference; lastKnownFileType = file; path = display.lookup; sourceTree = "<group>"; };
 		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
 		DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardShortcuts.swift; path = Classes/KeyboardShortcuts.swift; sourceTree = "<group>"; };
-		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DC4E040C1A1774F1008D6DD5 /* DebuggerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DebuggerMenu.swift; path = Classes/DebuggerMenu.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC56268F198B75E80040453F /* XNUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT2.ROM; path = ROMs/XNUT2.ROM; sourceTree = "<group>"; };
 		DC562690198B75E80040453F /* XNUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT1.ROM; path = ROMs/XNUT1.ROM; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
 		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC705C871A951B16009C98D3 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
-		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DC74922619CF1E600012B5C0 /* Debugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Debugger.swift; path = Classes/Debugger.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC75043819B2652200180161 /* hpfont.hpfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = hpfont.hpfont; sourceTree = "<group>"; };
 		DC799D871A155CA2002FACBE /* my41.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = my41.icns; path = my41/my41.icns; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
@@ -871,15 +871,15 @@
 			name = Keyboard;
 			sourceTree = "<group>";
 		};
-		DC74922519CF1E480012B5C0 /* Debuger */ = {
+		DC74922519CF1E480012B5C0 /* Debugger */ = {
 			isa = PBXGroup;
 			children = (
-				DC74922619CF1E600012B5C0 /* Debuger.swift */,
-				DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */,
+				DC74922619CF1E600012B5C0 /* Debugger.swift */,
+				DC4E040C1A1774F1008D6DD5 /* DebuggerMenu.swift */,
 				DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */,
 				DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */,
 			);
-			name = Debuger;
+			name = Debugger;
 			sourceTree = "<group>";
 		};
 		DC78A1D81992C49400258BD5 /* Display */ = {
@@ -995,7 +995,7 @@
 				DC45285619897DA600C40B6C /* AppDelegate.swift */,
 				DC6728111A2769E800B4274F /* AlphaKeyboard.swift */,
 				DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */,
-				DC74922519CF1E480012B5C0 /* Debuger */,
+				DC74922519CF1E480012B5C0 /* Debugger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
 				DC7B7E1219AFAFA600C70269 /* Peripherals */,
 				DC2E476A1995766000BCACAF /* Preferences */,
@@ -1147,7 +1147,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = iPera;
 				TargetAttributes = {
 					DC45284C19897DA500C40B6C = {
@@ -1166,9 +1166,9 @@
 					};
 					DCE75C001A61B4FE002B2D7C = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = LS2ZZ4TR54;
+						DevelopmentTeam = DTYJ9NRJ99;
 						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1544,13 +1544,13 @@
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
-				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
+				DC74922719CF1E600012B5C0 /* Debugger.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
 				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
 				DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */,
 				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
-				DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */,
+				DC4E040D1A1774F1008D6DD5 /* DebuggerMenu.swift in Sources */,
 				DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */,
 				DC5626B1198B89FC0040453F /* RamChip.swift in Sources */,
 				DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */,
@@ -1663,6 +1663,23 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1674,6 +1691,12 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1689,11 +1712,34 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -1711,6 +1757,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DTYJ9NRJ99;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1718,7 +1765,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1733,6 +1779,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DTYJ9NRJ99;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dragonsoft.my41cx.osx;
@@ -1785,26 +1832,18 @@
 		DCE75C1D1A61B4FE002B2D7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = LS2ZZ4TR54;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.my41cx.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dragonsoft.my41cx.osx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = my41CX_iOS_Development;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1812,22 +1851,18 @@
 		DCE75C1E1A61B4FE002B2D7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = LS2ZZ4TR54;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.my41cx.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dragonsoft.my41cx.osx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "my41CX for iOS AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

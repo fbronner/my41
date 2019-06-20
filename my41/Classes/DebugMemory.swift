@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-final class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+final class DebugMemoryViewController: NSViewController, NSTableViewDelegate {
 	var debugContainerViewController: DebugContainerViewController?
 	var bankSelected = 0
 
@@ -41,12 +41,12 @@ final class DebugMemoryViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidLoad()
 
 		NotificationCenter.default.addObserver(self, selector: #selector(displaySelectedMemoryBank), name: .kMemoryDebugUpdateDisplay, object: nil)
-
 	}
 	
-	override func viewDidAppear() {
-        super.viewDidAppear()
+	override func viewWillAppear() {
+        super.viewWillAppear()
 
+        tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
 		tableView.scrollRowToVisible(0)
 	}
@@ -150,37 +150,7 @@ final class DebugMemoryViewController: NSViewController, NSTableViewDataSource, 
 		}
 	}
 
-	//MARK: - TableView DataSource & Delegate
-	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-		return 0x40		// Number of RAM banks
-	}
-	
-	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		var value: AnyObject?
-		
-		if tableColumn?.identifier.rawValue == "avail" {
-//			if bus.RAMExists(row << 4) {
-			value = NSNumber(value: NSControl.StateValue.on.rawValue)
-//			} else {
-//				value = NSNumber(integer: NSOffState)
-//			}
-		}
-		
-		if tableColumn?.identifier.rawValue == "bank" {
-			value = NSString(format:"0x%.2X", row)
-		}
-		
-		if tableColumn?.identifier.rawValue == "begins" {
-			value = NSString(format:"0x%.3X", row << 4)
-		}
-		
-		if tableColumn?.identifier.rawValue == "ends" {
-			value = NSString(format:"0x%.3X", (row << 4) + 0x0f)
-		}
-		
-		return value
-	}
-	
+
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
 		return true
 	}
@@ -191,3 +161,40 @@ final class DebugMemoryViewController: NSViewController, NSTableViewDataSource, 
 		displaySelectedMemoryBank()
 	}
 }
+
+// MARK: - NSTableViewDataSource
+extension DebugMemoryViewController: NSTableViewDataSource {
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return 0x40        // Number of RAM banks
+    }
+
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        var value: AnyObject?
+
+        if tableColumn?.identifier.rawValue == "avail" {
+            if bus.RAMExists(row << 4) {
+                value = NSNumber(booleanLiteral: true) // NSNumber(value: NSControl.StateValue.on.rawValue)
+            } else {
+                value = NSNumber(booleanLiteral: false) // NSNumber(value: NSControl.StateValue.on.rawValue)
+            }
+        }
+
+        if tableColumn?.identifier.rawValue == "bank" {
+            value = NSString(format:"0x%.2X", row)
+        }
+
+        if tableColumn?.identifier.rawValue == "begins" {
+            value = NSString(format:"0x%.3X", row << 4)
+        }
+
+        if tableColumn?.identifier.rawValue == "ends" {
+            value = NSString(format:"0x%.3X", (row << 4) + 0x0f)
+        }
+
+        return value
+    }
+
+}
+
+// MARK: - TableViewDelegate
